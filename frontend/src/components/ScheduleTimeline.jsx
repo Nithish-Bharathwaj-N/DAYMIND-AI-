@@ -20,22 +20,25 @@ export default function ScheduleTimeline({ backendTasks = [], onToggleComplete, 
   const currentHour = now.getHours();
   const todayISO = new Date().toISOString().split('T')[0];
 
-  // Filter to today's tasks only — uses scheduledDate from backend
+  // Filter to today's tasks — uses scheduledDate or dayOfWeek matching current day
   const todayTasks = backendTasks.filter(t => {
-    if (!t.scheduledDate) return false;
-    const d = Array.isArray(t.scheduledDate)
-      ? `${t.scheduledDate[0]}-${String(t.scheduledDate[1]).padStart(2,'0')}-${String(t.scheduledDate[2]).padStart(2,'0')}`
-      : t.scheduledDate;
-    return d === todayISO;
+    if (t.scheduledDate) {
+      const d = Array.isArray(t.scheduledDate)
+        ? `${t.scheduledDate[0]}-${String(t.scheduledDate[1]).padStart(2,'0')}-${String(t.scheduledDate[2]).padStart(2,'0')}`
+        : String(t.scheduledDate);
+      if (d.startsWith(todayISO)) return true;
+    }
+    // Fallback match by dayOfWeek (e.g., "Wednesday")
+    return t.dayOfWeek && t.dayOfWeek.toLowerCase() === dayName.toLowerCase();
   });
 
   const sortedTasks = [...todayTasks].sort((a, b) => a.assignedHourSlot - b.assignedHourSlot);
   const isEmpty = sortedTasks.length === 0;
-  const completed = sortedTasks.filter(t => t.isCompleted).length;
+  const completed = sortedTasks.filter(t => (t.isCompleted || t.completed)).length;
   const progressPct = sortedTasks.length > 0 ? Math.round((completed / sortedTasks.length) * 100) : 0;
 
   // Identify current active task for Current Focus Hero HUD
-  const activeTask = sortedTasks.find(t => !t.isCompleted && (t.assignedHourSlot === currentHour || t.assignedHourSlot >= currentHour)) || sortedTasks.find(t => !t.isCompleted) || sortedTasks[0];
+  const activeTask = sortedTasks.find(t => !(t.isCompleted || t.completed) && (t.assignedHourSlot === currentHour || t.assignedHourSlot >= currentHour)) || sortedTasks.find(t => !(t.isCompleted || t.completed)) || sortedTasks[0];
 
   const formatHour = (h) => {
     const suffix = h >= 12 ? 'PM' : 'AM';
@@ -158,8 +161,7 @@ export default function ScheduleTimeline({ backendTasks = [], onToggleComplete, 
                   onSelectTask && onSelectTask(task);
                 }}
                 className="flex items-start gap-3 group cursor-pointer relative"
-              >
-                {/* Timeline dot */}
+                     {/* Timeline dot */}
                 <div
                   onClick={(e) => {
                     e.stopPropagation();
@@ -167,7 +169,7 @@ export default function ScheduleTimeline({ backendTasks = [], onToggleComplete, 
                     onToggleComplete && onToggleComplete(task.id);
                   }}
                   className={`-ml-[21px] mt-2.5 w-3 h-3 rounded-full border-2 border-[var(--bg-card)] shrink-0 transition-all cursor-pointer ${
-                    task.isCompleted
+                    (task.isCompleted || task.completed)
                       ? 'bg-emerald-500'
                       : isCurrent
                       ? 'bg-purple-600 ring-4 ring-purple-600/20'
@@ -184,7 +186,7 @@ export default function ScheduleTimeline({ backendTasks = [], onToggleComplete, 
 
                 {/* Card */}
                 <div className={`flex-1 p-3 rounded-xl border transition-all group-hover:shadow-sm mb-2 relative overflow-hidden ${
-                  task.isCompleted
+                  (task.isCompleted || task.completed)
                     ? 'bg-slate-50 dark:bg-slate-800/30 border-slate-200 dark:border-slate-700/50 opacity-55'
                     : isCurrent
                     ? 'bg-purple-50 dark:bg-purple-950/30 border-purple-200 dark:border-purple-500/30 shadow-sm shadow-purple-500/10'
@@ -193,12 +195,13 @@ export default function ScheduleTimeline({ backendTasks = [], onToggleComplete, 
                   {/* Left accent bar */}
                   <div
                     className="absolute left-0 top-0 bottom-0 w-0.5 rounded-l-full"
-                    style={{ backgroundColor: meta.bar, opacity: task.isCompleted ? 0.3 : 0.8 }}
+                    style={{ backgroundColor: meta.bar, opacity: (task.isCompleted || task.completed) ? 0.3 : 0.8 }}
                   />
+
                   <div className="flex items-start justify-between gap-2 pl-1">
                     <div className="flex-1 min-w-0">
                       <div className={`text-xs font-bold leading-snug ${
-                        task.isCompleted ? 'line-through text-[var(--text-muted)]' : 'text-[var(--text-primary)]'
+                        (task.isCompleted || task.completed) ? 'line-through text-[var(--text-muted)]' : 'text-[var(--text-primary)]'
                       }`}>
                         {task.title}
                       </div>
@@ -207,7 +210,7 @@ export default function ScheduleTimeline({ backendTasks = [], onToggleComplete, 
                         <span className="text-[10px] font-mono text-[var(--text-muted)]">
                           {startTime} → {endTime}
                         </span>
-                        {isCurrent && !task.isCompleted && (
+                        {isCurrent && !(task.isCompleted || task.completed) && (
                           <span className="text-[10px] font-bold text-purple-600 dark:text-purple-400 flex items-center gap-0.5">
                             <span className="w-1.5 h-1.5 rounded-full bg-purple-600 animate-pulse inline-block" /> Now
                           </span>
@@ -233,13 +236,13 @@ export default function ScheduleTimeline({ backendTasks = [], onToggleComplete, 
                           sound.playComplete();
                           onToggleComplete && onToggleComplete(task.id);
                         }}
-                        title={task.isCompleted ? 'Mark Pending' : 'Mark Done'}
+                        title={(task.isCompleted || task.completed) ? 'Mark Pending' : 'Mark Done'}
                         className={`p-1.5 rounded-lg transition-all cursor-pointer ${
-                          task.isCompleted
+                          (task.isCompleted || task.completed)
                             ? 'text-emerald-500 hover:bg-emerald-500/10'
                             : 'text-[var(--text-muted)] hover:text-emerald-500 hover:bg-emerald-500/10'
                         }`}
-                      >
+                      >                 >
                         <CheckCircle2 className="w-4 h-4" />
                       </button>
                       <button

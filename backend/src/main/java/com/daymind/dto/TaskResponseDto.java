@@ -3,6 +3,9 @@ package com.daymind.dto;
 import com.daymind.model.BaseTask;
 import com.daymind.model.Category;
 import com.daymind.model.Priority;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.time.LocalDate;
 
 public class TaskResponseDto {
     private Long id;
@@ -13,6 +16,7 @@ public class TaskResponseDto {
     private double polymorphicMultiplier;
     private int assignedHourSlot;
     private String dayOfWeek;
+    private LocalDate scheduledDate;
     private boolean isScheduled;
     private boolean isCompleted;
     private Category category;
@@ -34,6 +38,7 @@ public class TaskResponseDto {
         dto.setPolymorphicMultiplier(task.getCategoryMultiplier());
         dto.setAssignedHourSlot(task.getAssignedHourSlot());
         dto.setDayOfWeek(task.getDayOfWeek());
+        dto.setScheduledDate(task.getScheduledDate());
         dto.setScheduled(task.isScheduled());
         dto.setCompleted(task.isCompleted());
         dto.setCategory(task.getCategory());
@@ -77,9 +82,14 @@ public class TaskResponseDto {
     public String getDayOfWeek() { return dayOfWeek; }
     public void setDayOfWeek(String dayOfWeek) { this.dayOfWeek = dayOfWeek; }
 
+    public LocalDate getScheduledDate() { return scheduledDate; }
+    public void setScheduledDate(LocalDate scheduledDate) { this.scheduledDate = scheduledDate; }
+
+    @JsonProperty("isScheduled")
     public boolean isScheduled() { return isScheduled; }
     public void setScheduled(boolean scheduled) { isScheduled = scheduled; }
 
+    @JsonProperty("isCompleted")
     public boolean isCompleted() { return isCompleted; }
     public void setCompleted(boolean completed) { isCompleted = completed; }
 
