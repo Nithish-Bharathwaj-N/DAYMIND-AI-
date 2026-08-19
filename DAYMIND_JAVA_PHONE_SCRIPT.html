@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>DayMind AI — Mobile Teleprompter Script</title>
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: #121826;
+      --text: #f8fafc;
+      --amber: #fbbf24;
+      --purple: #c084fc;
+      --emerald: #34d399;
+      --rose: #f87171;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      padding: 20px 16px 60px 16px;
+      line-height: 1.6;
+      -webkit-text-size-adjust: 100%;
+    }
+    .header {
+      text-align: center;
+      padding: 16px 0;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+      margin-bottom: 24px;
+    }
+    .header h1 {
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--amber);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .header p {
+      font-size: 13px;
+      color: #94a3b8;
+      margin-top: 4px;
+    }
+    .badge-obs {
+      display: inline-block;
+      background: linear-gradient(135deg, #d97706, #b45309);
+      color: #ffffff;
+      font-weight: 900;
+      font-size: 12px;
+      padding: 6px 12px;
+      border-radius: 20px;
+      margin: 16px 0 10px 0;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 12px rgba(217, 119, 6, 0.3);
+    }
+    .section-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 24px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+    .section-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--purple);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .time-tag {
+      font-size: 11px;
+      font-family: monospace;
+      background: rgba(192, 132, 252, 0.15);
+      color: var(--purple);
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+    .script-text {
+      font-size: 18px;
+      font-weight: 500;
+      color: #e2e8f0;
+      margin-bottom: 14px;
+    }
+    .script-text strong {
+      color: var(--amber);
+      font-weight: 800;
+    }
+    .highlight-box {
+      background: rgba(52, 211, 153, 0.1);
+      border-left: 4px solid var(--emerald);
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 15px;
+      color: #a7f3d0;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>DayMind AI (Java Edition)</h1>
+    <p>Mobile Teleprompter Script • Target Duration: 4:30</p>
+  </div>
+
+  <!-- SECTION 1 -->
+  <div class="badge-obs">📷 [OBS HOTKEY: F1] - SLIDES / INTRO</div>
+  <div class="section-card">
+    <div class="section-title">
+      <span>1. Problem & Overview</span>
+      <span class="time-tag">0:00 - 0:45</span>
+    </div>
+    <div class="script-text">
+      "Good morning evaluators! Today I present <strong>DayMind AI (Java Spring Boot Edition)</strong>.
+    </div>
+    <div class="script-text">
+      Human beings suffer from the <strong>Planning Fallacy</strong>, consistently underestimating task duration by <strong>25% to 40%</strong>.
+    </div>
+    <div class="script-text">
+      DayMind AI solves this using <strong>Core Java OOP concept polymorphism</strong>, category duration multipliers, dynamic flexibility score bumping, and multi-day learning roadmap scheduling."
+    </div>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="badge-obs">💻 [OBS HOTKEY: F2] - VS CODE JAVA CODE</div>
+  <div class="section-card">
+    <div class="section-title">
+      <span>2. Core Java OOP Architecture</span>
+      <span class="time-tag">0:45 - 2:00</span>
+    </div>
+    <div class="script-text">
+      "In <strong>BaseTask.java</strong>, we define an abstract class with private fields and three abstract methods.
+    </div>
+    <div class="script-text">
+      Concrete subclasses override duration multipliers:
+      <br>• <strong>AcademicTask: 1.25x</strong> (+25% bias correction)
+      <br>• <strong>WorkTask: 1.15x</strong> (+15%)
+      <br>• <strong>HealthTask: 1.30x</strong> (+30%)
+      <br>• <strong>UrgentTask: 1.00x weight</strong> (Top priority)
+    </div>
+    <div class="script-text">
+      We implement the <strong>Factory Pattern</strong> in TaskFactory and the <strong>Strategy Pattern</strong> in FlexibilityBumpingStrategy to resolve slot conflicts."
+    </div>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="badge-obs">🌐 [OBS HOTKEY: F3] - REACT 18 LIVE DEMO</div>
+  <div class="section-card">
+    <div class="section-title">
+      <span>3. Live Dashboard Demo</span>
+      <span class="time-tag">2:00 - 3:45</span>
+    </div>
+    <div class="script-text">
+      "On Port 5173, notice how creating an Academic Task with 60 mins user estimate gets predicted as <strong>75 mins (1.25x)</strong> live!
+    </div>
+    <div class="script-text">
+      Watch as I add an <strong>Urgent Task</strong> at 9 AM: the Java strategy engine preempts the slot and bumps the academic task to 10 AM instantly!
+    </div>
+    <div class="script-text">
+      Finally, opening the <strong>Learning Roadmap Wizard</strong> synthesizes a 5-day course and batch schedules modules into our weekly calendar cells."
+    </div>
+    <div class="highlight-box">
+      ⚡ Point out live 0ms UI latency and Spring Boot REST API integration on Port 8080!
+    </div>
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="badge-obs">🏆 [OBS HOTKEY: F1] - RECAP & CONCLUSION</div>
+  <div class="section-card">
+    <div class="section-title">
+      <span>4. Technical Summary</span>
+      <span class="time-tag">3:45 - 4:30</span>
+    </div>
+    <div class="script-text">
+      "DayMind AI bridges Core Java Object-Oriented theory with enterprise Spring Boot microservices and React 18 frontend engineering.
+    </div>
+    <div class="script-text">
+      Thank you for your time, and I welcome your questions!"
+    </div>
+  </div>
+
+</body>
+</html>

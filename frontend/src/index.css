@@ -1,0 +1,246 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import "tailwindcss";
+
+@layer base {
+  :root, .dark {
+    --bg-main: #0b0e17;
+    --bg-card: #131826;
+    --bg-sidebar: #101421;
+    --bg-sidebar-active: rgba(108, 92, 231, 0.2);
+    --bg-input: #1a2035;
+    --border-color: #1e2638;
+    --border-strong: #2a3450;
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --accent-purple: #7c3aed;
+    --accent-purple-light: rgba(124, 58, 237, 0.2);
+    --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+    --tag-bg: #1e2638;
+    --tag-border: #2a3450;
+    --code-bg: #0d1117;
+    color-scheme: dark;
+  }
+
+  html, body {
+    background-color: #0b0e17;
+    color: #f1f5f9;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    overflow-x: hidden;
+  }
+
+  input, textarea, select {
+    background-color: var(--bg-input);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+  }
+  input::placeholder, textarea::placeholder {
+    color: var(--text-muted);
+  }
+}
+
+/* ─── Core Card ─── */
+.ui-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  box-shadow: var(--card-shadow);
+  transition: all 0.2s ease;
+}
+
+.ui-sidebar {
+  background-color: var(--bg-sidebar);
+  border-right: 1px solid var(--border-color);
+}
+
+/* ─── Glass Card — THEME-AWARE (not dark-only) ─── */
+.glass-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  box-shadow: var(--card-shadow);
+  transition: all 0.2s ease;
+}
+
+.dark .glass-card {
+  background: rgba(19, 24, 38, 0.85);
+  border-color: rgba(255,255,255,0.08);
+  backdrop-filter: blur(12px);
+}
+
+/* ─── Solid Non-Transparent Modal — prevents background bleed ─── */
+.glass-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.glass-modal-content {
+  position: relative;
+  z-index: 51;
+  background-color: var(--bg-card) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-primary) !important;
+  border-radius: 1.25rem;
+  box-shadow: 0 20px 60px -10px rgba(0, 0, 0, 0.4) !important;
+  opacity: 1 !important;
+}
+
+/* ─── Theme-aware table cells ─── */
+.theme-table th,
+.theme-table td {
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+.theme-table thead {
+  background-color: var(--bg-main);
+}
+.theme-table tbody tr:hover {
+  background-color: var(--bg-input);
+}
+
+/* ─── Theme-aware empty cell ─── */
+.empty-slot {
+  border: 1px dashed var(--border-color);
+  color: var(--text-muted);
+  border-radius: 0.75rem;
+}
+.empty-slot:hover {
+  border-color: var(--accent-purple);
+  background-color: var(--accent-purple-light);
+}
+
+/* ─── Category Chip Tags ─── */
+.tag-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-size: 10px;
+  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background-color: var(--tag-bg);
+  border: 1px solid var(--tag-border);
+  color: var(--text-secondary);
+}
+
+/* ─── AI Glow Pulse ─── */
+.ai-pulse {
+  position: relative;
+}
+.ai-pulse::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, #6c5ce7, #a78bfa, #06b6d4);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+  border-radius: 1rem;
+}
+.ai-pulse:hover::before {
+  opacity: 0.15;
+}
+
+/* ─── Typing Cursor Animation ─── */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.typing-cursor::after {
+  content: '▋';
+  display: inline-block;
+  animation: blink 0.8s step-end infinite;
+  color: var(--accent-purple);
+  margin-left: 1px;
+  font-size: 0.9em;
+}
+
+/* ─── Custom Scrollbar ─── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+.scrollbar-none::-webkit-scrollbar { display: none; }
+.scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ─── Slide Down Animation ─── */
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-slide-down {
+  animation: slideDown 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ─── Fade In Up ─── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-up {
+  animation: fadeInUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ─── Input reset for theme ─── */
+.theme-input {
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  border-radius: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.8125rem;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  width: 100%;
+  outline: none;
+}
+.theme-input:focus {
+  border-color: var(--accent-purple);
+  box-shadow: 0 0 0 3px var(--accent-purple-light);
+}
+.theme-input::placeholder {
+  color: var(--text-muted);
+}
+
+/* ─── Habit Grid ─── */
+.habit-cell {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  background-color: var(--tag-bg);
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.habit-cell.done {
+  background-color: var(--accent-purple);
+  border-color: var(--accent-purple);
+}
+.habit-cell:hover {
+  transform: scale(1.2);
+}
+
+/* ─── Note Card ─── */
+.note-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 0.875rem;
+  padding: 1rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+.note-card:hover {
+  border-color: var(--accent-purple);
+  box-shadow: 0 0 0 3px var(--accent-purple-light);
+}

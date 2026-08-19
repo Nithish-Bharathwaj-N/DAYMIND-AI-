@@ -1,0 +1,31 @@
+# Node / React
+node_modules/
+dist/
+dist-ssr/
+*.local
+.env*.local
+
+# Maven / Java
+target/
+*.class
+*.jar
+*.war
+
+# IDEs & OS
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# H2 Database files
+*.db
+*.mv.db
+*.trace.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
