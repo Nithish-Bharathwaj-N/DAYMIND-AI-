@@ -59,50 +59,52 @@ public class DataInitializer implements CommandLineRunner {
     }
 
     private void seedTasks() {
-        if (taskRepository.count() > 0) {
-            log.info("[DAYMIND] Tasks already exist — skipping seed.");
-            return;
-        }
+        taskRepository.deleteAll();
         LocalDate today = LocalDate.now();
         String todayName = getDayName(today);
         String tomorrowName = getDayName(today.plusDays(1));
 
-        // Task 1: Completed deep work
+        // Task 1: Deep work
         BaseTask t1 = TaskFactory.createTask("Deep Work: System Design Review",
                 "deep work system design review", 90, 8, todayName, Category.WORK, Priority.HIGH);
         t1.setScheduledDate(today);
-        t1.setCompleted(true);
+        t1.setCompleted(false);
         taskRepository.save(t1);
 
-        // Task 2: Cybersecurity report (in progress)
+        // Task 2: Cybersecurity report
         BaseTask t2 = TaskFactory.createTask("Cybersecurity Project Report",
                 "finish cybersecurity assignment report", 75, 10, todayName, Category.ACADEMIC, Priority.HIGH);
         t2.setScheduledDate(today);
         t2.setDueDate(today.plusDays(1));
+        t2.setCompleted(false);
         taskRepository.save(t2);
 
         // Task 3: Team standup
         BaseTask t3 = TaskFactory.createTask("Team Standup & Sprint Planning",
                 "team standup sprint planning meeting", 30, 11, todayName, Category.WORK, Priority.MEDIUM);
         t3.setScheduledDate(today);
+        t3.setCompleted(false);
         taskRepository.save(t3);
 
         // Task 4: Java OOP Study
         BaseTask t4 = TaskFactory.createTask("Java OOP — Design Patterns Study",
                 "java oop design patterns study", 60, 14, todayName, Category.ACADEMIC, Priority.HIGH);
         t4.setScheduledDate(today);
+        t4.setCompleted(false);
         taskRepository.save(t4);
 
         // Task 5: Workout
         BaseTask t5 = TaskFactory.createTask("Evening Workout & Running",
                 "workout gym run health", 45, 17, todayName, Category.HEALTH, Priority.MEDIUM);
         t5.setScheduledDate(today);
+        t5.setCompleted(false);
         taskRepository.save(t5);
 
         // Task 6: ML Course
         BaseTask t6 = TaskFactory.createTask("Machine Learning: Neural Networks Module",
                 "ml course neural networks learn deep learning", 90, 19, todayName, Category.LEARNING, Priority.MEDIUM);
         t6.setScheduledDate(today);
+        t6.setCompleted(false);
         taskRepository.save(t6);
 
         // Task 7: URGENT bug fix today
@@ -110,6 +112,7 @@ public class DataInitializer implements CommandLineRunner {
                 "urgent fix bug crash production api", 45, 15, todayName, Category.URGENT, Priority.URGENT);
         t7.setScheduledDate(today);
         t7.setDueDate(today);
+        t7.setCompleted(false);
         taskRepository.save(t7);
 
         // Task 8: Tomorrow — React project
@@ -117,19 +120,21 @@ public class DataInitializer implements CommandLineRunner {
                 "react frontend calendar integration daymind", 120, 9, tomorrowName, Category.WORK, Priority.HIGH);
         t8.setScheduledDate(today.plusDays(1));
         t8.setDueDate(today.plusDays(2));
+        t8.setCompleted(false);
         taskRepository.save(t8);
 
         // Task 9: Tomorrow — DB work
         BaseTask t9 = TaskFactory.createTask("Spring Boot JPA Schema Optimization",
                 "spring boot database jpa optimization", 60, 11, tomorrowName, Category.WORK, Priority.MEDIUM);
         t9.setScheduledDate(today.plusDays(1));
+        t9.setCompleted(false);
         taskRepository.save(t9);
 
-        // Task 10: Yesterday — completed reading
+        // Task 10: Yesterday — reading
         BaseTask t10 = TaskFactory.createTask("Read: Atomic Habits — Chapter 8",
                 "read book personal atomic habits", 30, 20, getDayName(today.minusDays(1)), Category.PERSONAL, Priority.LOW);
         t10.setScheduledDate(today.minusDays(1));
-        t10.setCompleted(true);
+        t10.setCompleted(false);
         taskRepository.save(t10);
 
         log.info("[DAYMIND] Seeded {} tasks.", taskRepository.count());

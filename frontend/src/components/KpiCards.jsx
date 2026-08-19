@@ -22,9 +22,22 @@ export default function KpiCards({ tasks = [] }) {
       .catch(() => {});
   }, []);
 
-  // Task stats — from real task list passed via props
-  const completedCount = tasks.filter(t => t.completed || t.isCompleted).length;
-  const totalCount     = tasks.length;
+  // Task stats — filter to today's tasks specifically
+  const todayISO = new Date().toISOString().split('T')[0];
+  const dayName = new Date().toLocaleDateString('en-US', { weekday: 'long' });
+
+  const todayTasks = tasks.filter(t => {
+    if (t.scheduledDate) {
+      const d = Array.isArray(t.scheduledDate)
+        ? `${t.scheduledDate[0]}-${String(t.scheduledDate[1]).padStart(2,'0')}-${String(t.scheduledDate[2]).padStart(2,'0')}`
+        : String(t.scheduledDate);
+      if (d.startsWith(todayISO)) return true;
+    }
+    return t.dayOfWeek && t.dayOfWeek.toLowerCase() === dayName.toLowerCase();
+  });
+
+  const completedCount = todayTasks.filter(t => t.completed || t.isCompleted).length;
+  const totalCount     = todayTasks.length;
   const tasksPercent   = totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0;
 
   // Focus time
