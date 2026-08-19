@@ -161,7 +161,8 @@ export default function ScheduleTimeline({ backendTasks = [], onToggleComplete, 
                   onSelectTask && onSelectTask(task);
                 }}
                 className="flex items-start gap-3 group cursor-pointer relative"
-                     {/* Timeline dot */}
+              >
+                {/* Timeline dot */}
                 <div
                   onClick={(e) => {
                     e.stopPropagation();
@@ -242,7 +243,7 @@ export default function ScheduleTimeline({ backendTasks = [], onToggleComplete, 
                             ? 'text-emerald-500 hover:bg-emerald-500/10'
                             : 'text-[var(--text-muted)] hover:text-emerald-500 hover:bg-emerald-500/10'
                         }`}
-                      >                 >
+                      >
                         <CheckCircle2 className="w-4 h-4" />
                       </button>
                       <button
