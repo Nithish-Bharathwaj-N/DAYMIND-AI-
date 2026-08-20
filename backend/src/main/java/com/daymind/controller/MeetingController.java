@@ -71,14 +71,21 @@ public class MeetingController {
     // Legacy flat endpoint still works
     @PostMapping("/convert-action-items")
     public ResponseEntity<Map<String, Object>> convertActionItemsLegacy(@RequestBody Map<String, Object> payload) {
-        Long meetingId = payload.containsKey("meetingId") ? ((Number) payload.get("meetingId")).longValue() : null;
+        Long meetingId = payload.containsKey("meetingId") && payload.get("meetingId") != null
+                ? ((Number) payload.get("meetingId")).longValue() : null;
         List<Map<String, Object>> actionItems = (List<Map<String, Object>>) payload.getOrDefault("actionItems", List.of());
 
         if (meetingId == null) {
-            Map<String, Object> response = new HashMap<>();
-            response.put("success", false);
-            response.put("message", "meetingId is required");
-            return ResponseEntity.badRequest().body(response);
+            List<Meeting> meetings = meetingService.getAllMeetings();
+            if (!meetings.isEmpty()) {
+                meetingId = meetings.get(0).getId();
+            } else {
+                Map<String, Object> meetingPayload = new HashMap<>();
+                meetingPayload.put("title", "Action Item Import");
+                meetingPayload.put("status", "COMPLETED");
+                Meeting meeting = meetingService.createMeeting(meetingPayload);
+                meetingId = meeting.getId();
+            }
         }
         Map<String, Object> result = meetingService.convertActionItemsToTasks(meetingId, actionItems);
         return ResponseEntity.ok(result);

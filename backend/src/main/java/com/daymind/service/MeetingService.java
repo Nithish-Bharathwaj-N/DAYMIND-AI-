@@ -71,16 +71,16 @@ public class MeetingService {
         // Use AI Provider (MockAIProvider or real) to analyze
         Map<String, Object> analysis = aiProvider.summarizeMeeting(meeting.getTitle(), transcript);
 
-        // Persist analyzed results back to DB
+        // Persist analyzed results back to DB safely with mutable lists
         meeting.setSummary((String) analysis.getOrDefault("summary", ""));
         meeting.setAnalyzed(true);
         meeting.setStatus(Meeting.MeetingStatus.COMPLETED);
 
-        if (analysis.containsKey("keyPoints")) {
-            meeting.setKeyPoints((List<String>) analysis.get("keyPoints"));
+        if (analysis.containsKey("keyPoints") && analysis.get("keyPoints") instanceof List<?>) {
+            meeting.setKeyPoints(new ArrayList<>((List<String>) analysis.get("keyPoints")));
         }
-        if (analysis.containsKey("decisions")) {
-            meeting.setDecisions((List<String>) analysis.get("decisions"));
+        if (analysis.containsKey("decisions") && analysis.get("decisions") instanceof List<?>) {
+            meeting.setDecisions(new ArrayList<>((List<String>) analysis.get("decisions")));
         }
 
         meetingRepository.save(meeting);
@@ -98,8 +98,10 @@ public class MeetingService {
 
         for (Map<String, Object> item : actionItems) {
             String taskTitle = (String) item.getOrDefault("task", "Action Item from " + meeting.getTitle());
-            int duration = item.containsKey("estimatedMinutes")
-                    ? (int) item.get("estimatedMinutes") : 60;
+            int duration = 60;
+            if (item.containsKey("estimatedMinutes") && item.get("estimatedMinutes") != null) {
+                duration = ((Number) item.get("estimatedMinutes")).intValue();
+            }
 
             // Find an available slot
             int slot = slotStart + scheduled;

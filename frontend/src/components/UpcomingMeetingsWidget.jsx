@@ -78,7 +78,7 @@ export default function UpcomingMeetingsWidget({ onViewCalendar }) {
                   <h4 className="text-xs font-extrabold text-[var(--text-primary)] truncate">{m.title}</h4>
                   <div className="text-[10px] font-mono text-[var(--text-secondary)] mt-0.5 flex items-center gap-1">
                     <Clock className="w-3 h-3" />
-                    <span>{m.scheduledTime || m.date || 'Scheduled'}</span>
+                    <span>{m.startTime ? `${m.startTime} ${m.endTime ? '– ' + m.endTime : ''}` : (m.scheduledTime || m.date || 'Scheduled')}</span>
                   </div>
                 </div>
                 <div className="text-[10px] font-mono font-bold text-purple-600 dark:text-purple-300 flex items-center gap-1">

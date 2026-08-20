@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.*;
 
 /**
  * DataInitializer seeds the in-memory H2 database with realistic demo data
@@ -266,8 +267,11 @@ public class DataInitializer implements CommandLineRunner {
         m1.setTitle("DayMind Sprint Planning");
         m1.setTranscript("We discussed the Q3 roadmap for DayMind AI. Ravi will prepare the API documentation by Friday. Kishore will complete backend testing by Thursday. I will finish the frontend calendar integration by tomorrow. We decided to adopt the new glassmorphic UI design system and approved 90-minute focus blocks for deep work sessions. Daily standups will happen at 11 AM going forward.");
         m1.setSummary("Q3 roadmap planning. Tasks assigned to team. UI design system adopted.");
-        m1.setStartTime("11:00");
-        m1.setEndTime("11:45");
+        m1.setKeyPoints(new ArrayList<>(List.of("Finalized 3 new feature concepts", "User research to be completed by Friday", "Adopted glassmorphic UI system")));
+        m1.setDecisions(new ArrayList<>(List.of("Approved 90-minute focus blocks", "Daily standups at 11 AM")));
+        m1.setParticipants(new ArrayList<>(List.of("Nithish B", "Ravi K", "Kishore M")));
+        m1.setStartTime("11:00 AM");
+        m1.setEndTime("11:45 AM");
         m1.setStatus(Meeting.MeetingStatus.COMPLETED);
         m1.setAnalyzed(true);
         meetingRepository.save(m1);
@@ -276,8 +280,11 @@ public class DataInitializer implements CommandLineRunner {
         m2.setTitle("Cybersecurity Project Review");
         m2.setTranscript("The cybersecurity project report needs to be completed by tomorrow. We reviewed the current progress on the methodology section. The team agreed that web security vulnerabilities and authentication patterns should be the main focus. Action items: complete the threat modeling section, add OWASP references, and prepare the conclusion by end of day.");
         m2.setSummary("Project review for cybersecurity report submission. Methodology and threat modeling are priority.");
-        m2.setStartTime("14:00");
-        m2.setEndTime("14:30");
+        m2.setKeyPoints(new ArrayList<>(List.of("Review threat modeling", "OWASP top 10 reference integration")));
+        m2.setDecisions(new ArrayList<>(List.of("Focus report on Web Vulnerabilities and Auth")));
+        m2.setParticipants(new ArrayList<>(List.of("Nithish B", "Sarah M")));
+        m2.setStartTime("02:00 PM");
+        m2.setEndTime("02:30 PM");
         m2.setStatus(Meeting.MeetingStatus.UPCOMING);
         m2.setMeetingDate(LocalDate.now().plusDays(1));
         meetingRepository.save(m2);
