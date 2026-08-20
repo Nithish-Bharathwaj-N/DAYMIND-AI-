@@ -92,9 +92,20 @@ public class MeetingService {
         Meeting meeting = meetingRepository.findById(meetingId)
                 .orElseThrow(() -> new InvalidTaskException("Meeting not found with ID: " + meetingId));
 
+        LocalDate today = LocalDate.now();
+        String dayName = today.getDayOfWeek().name();
+        String todayDayOfWeek = dayName.charAt(0) + dayName.substring(1).toLowerCase();
+
+        // Get occupied slots today
+        Set<Integer> occupiedSlots = new HashSet<>();
+        for (BaseTask t : taskRepository.findAll()) {
+            if (t.getScheduledDate() != null && t.getScheduledDate().equals(today)) {
+                occupiedSlots.add(t.getAssignedHourSlot());
+            }
+        }
+
         int scheduled = 0;
-        String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
-        int slotStart = 9;
+        int nextSlotCandidate = 9;
 
         for (Map<String, Object> item : actionItems) {
             String taskTitle = (String) item.getOrDefault("task", "Action Item from " + meeting.getTitle());
@@ -103,19 +114,37 @@ public class MeetingService {
                 duration = ((Number) item.get("estimatedMinutes")).intValue();
             }
 
-            // Find an available slot
-            int slot = slotStart + scheduled;
-            if (slot > 17) slot = 9 + (scheduled % 9);
+            // Category parsing
+            String catStr = (String) item.getOrDefault("category", "WORK");
+            Category cat = Category.WORK;
+            try { cat = Category.valueOf(catStr.toUpperCase()); } catch (Exception ignored) {}
+
+            // Priority parsing
+            String prioStr = (String) item.getOrDefault("priority", "HIGH");
+            Priority prio = Priority.HIGH;
+            try { prio = Priority.valueOf(prioStr.toUpperCase()); } catch (Exception ignored) {}
+
+            // Find next free slot between 8 AM and 6 PM (18)
+            while (occupiedSlots.contains(nextSlotCandidate) && nextSlotCandidate <= 18) {
+                nextSlotCandidate++;
+            }
+            if (nextSlotCandidate > 18) {
+                nextSlotCandidate = 9; // rollover if full
+            }
+            int slot = nextSlotCandidate;
+            occupiedSlots.add(slot);
+            nextSlotCandidate++;
 
             BaseTask task = TaskFactory.createTask(
                     taskTitle,
-                    "Action item from meeting: " + meeting.getTitle(),
+                    "Action item extracted from meeting: " + meeting.getTitle(),
                     duration,
                     slot,
-                    days[scheduled % days.length],
-                    Category.WORK,
-                    Priority.HIGH
+                    todayDayOfWeek,
+                    cat,
+                    prio
             );
+            task.setScheduledDate(today);
             task.setScheduled(true);
             taskRepository.save(task);
             scheduled++;
@@ -125,7 +154,7 @@ public class MeetingService {
         result.put("success", true);
         result.put("meetingTitle", meeting.getTitle());
         result.put("scheduledTasksCount", scheduled);
-        result.put("message", String.format("✅ %d action items from '%s' converted into scheduled tasks.", scheduled, meeting.getTitle()));
+        result.put("message", String.format("✅ %d action items from '%s' dynamically scheduled into today's calendar.", scheduled, meeting.getTitle()));
         return result;
     }
 

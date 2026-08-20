@@ -181,31 +181,11 @@ public class GeminiAIProvider implements AIProvider {
         String prompt = "Meeting Title: " + (title != null ? title : "Call") + "\nTranscript:\n" + transcript;
         String responseText = callGeminiApi(systemInstruction, prompt);
 
+        Map<String, Object> res = fallbackProvider.summarizeMeeting(title, transcript);
         if (responseText != null && !responseText.isBlank()) {
-            Map<String, Object> res = new HashMap<>();
-            res.put("meetingTitle", title != null ? title : "Meeting");
             res.put("summary", responseText);
-            res.put("keyPoints", List.of("Analyzed by Gemini 3.5 Flash Engine", "Key action items extracted to calendar"));
-
-            List<Map<String, Object>> items = new ArrayList<>();
-            Map<String, Object> item1 = new HashMap<>();
-            item1.put("id", 1);
-            item1.put("task", "Action items from: " + (title != null ? title : "Meeting"));
-            item1.put("owner", "You");
-            item1.put("dueDate", "Today");
-            item1.put("estimatedMinutes", 60);
-            item1.put("suggestedSlot", "Today @ 02:00 PM");
-            item1.put("reason", "Gemini AI identified this as priority post-meeting execution.");
-            item1.put("priority", "HIGH");
-            item1.put("category", "WORK");
-            items.add(item1);
-
-            res.put("actionItems", items);
-            res.put("decisions", List.of("Automated calendar sync enabled by Gemini 3.5 Flash"));
-            return res;
         }
-
-        return fallbackProvider.summarizeMeeting(title, transcript);
+        return res;
     }
 
     @Override

@@ -65,46 +65,150 @@ public class MockAIProvider implements AIProvider {
     @Override
     public Map<String, Object> summarizeMeeting(String title, String transcript) {
         Map<String, Object> response = new HashMap<>();
+        String safeTitle = (title != null && !title.isBlank()) ? title : "Meeting Call";
+        response.put("meetingTitle", safeTitle);
 
-        response.put("meetingTitle", title != null ? title : "Brainstorming Call");
-        response.put("summary", "Discussed Q2 roadmap, new feature ideas, and assigned tasks to team members.");
-        
-        List<String> keyPoints = List.of(
-            "Finalized 3 new feature concepts",
-            "User research to be completed by Friday",
-            "Next review meeting scheduled for May 16"
-        );
-        response.put("keyPoints", keyPoints);
+        if (transcript == null || transcript.isBlank()) {
+            response.put("summary", "Brief sync call regarding " + safeTitle + ".");
+            response.put("keyPoints", new ArrayList<>(List.of("Discussion completed", "No transcript text provided")));
+            response.put("decisions", new ArrayList<>(List.of("Follow up scheduled for tomorrow")));
+            response.put("actionItems", new ArrayList<>());
+            return response;
+        }
 
+        String[] lines = transcript.split("\n");
+        List<String> keyPoints = new ArrayList<>();
+        List<String> decisions = new ArrayList<>();
         List<Map<String, Object>> actionItems = new ArrayList<>();
-        
-        Map<String, Object> item1 = new HashMap<>();
-        item1.put("id", 1);
-        item1.put("task", "Prepare user flow drafts");
-        item1.put("owner", "Nithish B");
-        item1.put("dueDate", "May 14");
-        item1.put("estimatedMinutes", 90);
-        item1.put("suggestedSlot", "Tomorrow @ 10:00 AM");
-        item1.put("reason", "Your calendar is free and historical focus performance is high during morning hours.");
-        item1.put("priority", "HIGH");
-        item1.put("category", "WORK");
+        int itemId = 1;
 
-        Map<String, Object> item2 = new HashMap<>();
-        item2.put("id", 2);
-        item2.put("task", "Market research & competitor matrix");
-        item2.put("owner", "Sarah M");
-        item2.put("dueDate", "May 15");
-        item2.put("estimatedMinutes", 60);
-        item2.put("suggestedSlot", "Wednesday @ 02:00 PM");
-        item2.put("reason", "Optimal afternoon execution window.");
-        item2.put("priority", "MEDIUM");
-        item2.put("category", "WORK");
+        String currentSpeaker = "You";
+        StringBuilder summaryBuilder = new StringBuilder();
+        summaryBuilder.append("Meeting focused on ").append(safeTitle).append(". ");
 
-        actionItems.add(item1);
-        actionItems.add(item2);
+        int slotHour = 9;
 
+        for (String rawLine : lines) {
+            String line = rawLine.trim();
+            if (line.isBlank()) continue;
+
+            // Detect speaker format: "Name: sentence" or "Name - sentence"
+            String textContent = line;
+            if (line.contains(":")) {
+                String[] parts = line.split(":", 2);
+                currentSpeaker = parts[0].trim();
+                textContent = parts[1].trim();
+            } else if (line.contains(" - ")) {
+                String[] parts = line.split(" - ", 2);
+                currentSpeaker = parts[0].trim();
+                textContent = parts[1].trim();
+            }
+
+            String lower = textContent.toLowerCase();
+
+            // Detect decisions
+            if (lower.contains("decided") || lower.contains("agreed") || lower.contains("approve") || lower.contains("adopt") || lower.contains("finalize")) {
+                decisions.add(textContent.substring(0, Math.min(textContent.length(), 120)));
+            }
+
+            // Detect key discussion points
+            if (lower.contains("need") || lower.contains("discuss") || lower.contains("roadmap") || lower.contains("plan") || lower.contains("important")) {
+                keyPoints.add(textContent.substring(0, Math.min(textContent.length(), 120)));
+            }
+
+            // Detect action items: look for task indicators
+            boolean isActionItem = lower.contains("i will") || lower.contains("i can") || lower.contains("need to") ||
+                    lower.contains("let's") || lower.contains("take on") || lower.contains("finish") ||
+                    lower.contains("prepare") || lower.contains("study") || lower.contains("fix") ||
+                    lower.contains("report") || lower.contains("research") || lower.contains("create") ||
+                    lower.contains("build") || lower.contains("write") || lower.contains("submit");
+
+            if (isActionItem) {
+                // Clean task title
+                String taskTitle = textContent
+                        .replaceAll("(?i)^(let's|i will|i can|we need to|need to|please|i'll)\\s+", "")
+                        .trim();
+                if (taskTitle.length() > 60) {
+                    taskTitle = taskTitle.substring(0, 60) + "...";
+                }
+                if (taskTitle.length() < 5) {
+                    taskTitle = "Action item: " + safeTitle;
+                }
+                taskTitle = Character.toUpperCase(taskTitle.charAt(0)) + taskTitle.substring(1);
+
+                // Category detection
+                String category = "WORK";
+                if (lower.contains("cybersecurity") || lower.contains("java") || lower.contains("assignment") || lower.contains("study") || lower.contains("report") || lower.contains("exam")) {
+                    category = "ACADEMIC";
+                } else if (lower.contains("fix") || lower.contains("bug") || lower.contains("urgent") || lower.contains("crash")) {
+                    category = "URGENT";
+                } else if (lower.contains("learn") || lower.contains("course") || lower.contains("ml") || lower.contains("read")) {
+                    category = "LEARNING";
+                } else if (lower.contains("workout") || lower.contains("health") || lower.contains("gym")) {
+                    category = "HEALTH";
+                }
+
+                // Priority detection
+                String priority = "MEDIUM";
+                if (lower.contains("urgent") || lower.contains("asap") || lower.contains("critical") || lower.contains("today")) {
+                    priority = "URGENT";
+                } else if (lower.contains("important") || lower.contains("high") || lower.contains("must")) {
+                    priority = "HIGH";
+                }
+
+                // Duration detection
+                int duration = 60;
+                if (lower.contains("30") || lower.contains("half hour")) duration = 30;
+                if (lower.contains("45")) duration = 45;
+                if (lower.contains("90")) duration = 90;
+                if (lower.contains("2 hour") || lower.contains("120")) duration = 120;
+
+                String slotTime = String.format("%02d:00 %s", (slotHour > 12 ? slotHour - 12 : slotHour), (slotHour >= 12 ? "PM" : "AM"));
+                slotHour = (slotHour + 2 > 17) ? 9 : slotHour + 2;
+
+                Map<String, Object> item = new HashMap<>();
+                item.put("id", itemId++);
+                item.put("task", taskTitle);
+                item.put("owner", currentSpeaker);
+                item.put("dueDate", lower.contains("today") ? "Today" : lower.contains("tomorrow") ? "Tomorrow" : "This Week");
+                item.put("estimatedMinutes", duration);
+                item.put("suggestedSlot", "Today @ " + slotTime);
+                item.put("reason", "NLP Engine placed this in optimal " + category.toLowerCase() + " focus slot.");
+                item.put("priority", priority);
+                item.put("category", category);
+
+                actionItems.add(item);
+            }
+        }
+
+        // Fallbacks if lists empty
+        if (keyPoints.isEmpty()) {
+            keyPoints.add("Key objectives and tasks reviewed for " + safeTitle);
+            keyPoints.add("Timeline and deadlines aligned across team");
+        }
+        if (decisions.isEmpty()) {
+            decisions.add("Approved post-meeting execution schedule");
+        }
+        if (actionItems.isEmpty()) {
+            Map<String, Object> fallbackItem = new HashMap<>();
+            fallbackItem.put("id", 1);
+            fallbackItem.put("task", "Follow up on " + safeTitle + " action items");
+            fallbackItem.put("owner", "You");
+            fallbackItem.put("dueDate", "Today");
+            fallbackItem.put("estimatedMinutes", 45);
+            fallbackItem.put("suggestedSlot", "Today @ 02:00 PM");
+            fallbackItem.put("reason", "Action item generated from meeting notes.");
+            fallbackItem.put("priority", "HIGH");
+            fallbackItem.put("category", "WORK");
+            actionItems.add(fallbackItem);
+        }
+
+        summaryBuilder.append(String.format("Identified %d key action items and %d major decisions.", actionItems.size(), decisions.size()));
+
+        response.put("summary", summaryBuilder.toString());
+        response.put("keyPoints", keyPoints);
+        response.put("decisions", decisions);
         response.put("actionItems", actionItems);
-        response.put("decisions", List.of("Adopted new glassmorphic UI design system", "Approved 90-minute focus blocks for deep work"));
 
         return response;
     }
