@@ -7,18 +7,18 @@ const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
 const TIME_SLOTS = Array.from({ length: 13 }, (_, i) => i + 8); // 8:00 to 20:00
 
 const CATEGORY_COLORS = {
-  ACADEMIC: 'bg-purple-50 dark:bg-purple-950/60 text-purple-800 dark:text-purple-200 border-purple-300 dark:border-purple-500/40',
-  WORK:     'bg-blue-50 dark:bg-blue-950/60 text-blue-800 dark:text-blue-200 border-blue-300 dark:border-blue-500/40',
-  HEALTH:   'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-200 border-emerald-300 dark:border-emerald-500/40',
-  PERSONAL: 'bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-200 border-amber-300 dark:border-amber-500/40',
-  URGENT:   'bg-red-50 dark:bg-red-950/60 text-red-800 dark:text-red-200 border-red-300 dark:border-red-500/60',
-  LEARNING: 'bg-cyan-50 dark:bg-cyan-950/60 text-cyan-800 dark:text-cyan-200 border-cyan-300 dark:border-cyan-500/40',
-  OTHER:    'bg-slate-50 dark:bg-slate-900/60 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-600',
+  ACADEMIC: 'bg-purple-50 text-purple-900 border-purple-200',
+  WORK:     'bg-blue-50 text-blue-900 border-blue-200',
+  HEALTH:   'bg-emerald-50 text-emerald-900 border-emerald-200',
+  PERSONAL: 'bg-amber-50 text-amber-900 border-amber-200',
+  URGENT:   'bg-red-50 text-red-900 border-red-200',
+  LEARNING: 'bg-cyan-50 text-cyan-900 border-cyan-200',
+  OTHER:    'bg-slate-100 text-slate-800 border-slate-200',
 };
 
 const ENERGY_SLOTS = {
-  peak: { hours: [9, 10, 11], label: '⚡ Peak', bg: 'bg-amber-50/50 dark:bg-amber-950/10' },
-  work: { hours: [12, 13, 14, 15, 16], label: '🌤️ Focus', bg: 'bg-blue-50/50 dark:bg-blue-950/10' },
+  peak: { hours: [9, 10, 11], label: '⚡ Peak', bg: 'bg-amber-50/60' },
+  work: { hours: [12, 13, 14, 15, 16], label: '🌤️ Focus', bg: 'bg-blue-50/60' },
 };
 
 function getEnergyBadge(hour) {
@@ -28,7 +28,7 @@ function getEnergyBadge(hour) {
 }
 
 function getSlotBg(hour) {
-  if (hour >= 9 && hour <= 11) return 'bg-amber-500/4 dark:bg-amber-950/10';
+  if (hour >= 9 && hour <= 11) return 'bg-amber-500/5';
   return '';
 }
 
@@ -107,15 +107,15 @@ export default function WeeklyCalendar({ tasks = [], onToggleComplete, onDeleteT
                       key={day}
                       className={`p-3 text-center font-mono text-[11px] font-bold border-r border-[var(--border-color)] last:border-r-0 transition-colors ${
                         isToday
-                          ? 'bg-purple-50 dark:bg-purple-950/30 text-purple-700 dark:text-purple-300'
+                          ? 'bg-purple-50 text-purple-700 font-extrabold'
                           : 'text-[var(--text-secondary)]'
                       }`}
                     >
                       <div className="flex items-center justify-center gap-1.5">
                         <span>{day.slice(0, 3)}</span>
-                        {isToday && <span className="w-2 h-2 rounded-full bg-purple-500 animate-pulse" />}
+                        {isToday && <span className="w-2 h-2 rounded-full bg-purple-600 animate-pulse" />}
                       </div>
-                      <div className={`text-[9px] font-normal mt-0.5 ${isToday ? 'text-purple-600 dark:text-purple-400 font-bold' : 'text-[var(--text-muted)]'}`}>
+                      <div className={`text-[9px] font-normal mt-0.5 ${isToday ? 'text-purple-600 font-bold' : 'text-[var(--text-muted)]'}`}>
                         {isToday ? '★ Today' : day.slice(0, 3)}
                       </div>
                     </th>
@@ -142,7 +142,7 @@ export default function WeeklyCalendar({ tasks = [], onToggleComplete, onDeleteT
                         <td
                           key={day}
                           className={`p-1 border-r border-[var(--border-color)] last:border-r-0 h-20 align-top ${
-                            isToday ? 'bg-purple-50/40 dark:bg-purple-950/10' : ''
+                            isToday ? 'bg-purple-50/40' : ''
                           }`}
                         >
                           {task ? (
@@ -150,19 +150,19 @@ export default function WeeklyCalendar({ tasks = [], onToggleComplete, onDeleteT
                               onClick={() => { sound.playClick(); onSelectTask && onSelectTask(task); }}
                               className={`p-2 rounded-xl border h-full flex flex-col justify-between transition-all cursor-pointer hover:scale-[1.02] hover:shadow-md ${
                                 task.isCompleted
-                                  ? 'bg-slate-100 dark:bg-slate-800/60 border-slate-200 dark:border-slate-700 opacity-60'
+                                  ? 'bg-slate-100 border-slate-200 opacity-60'
                                   : CATEGORY_COLORS[task.category] || CATEGORY_COLORS.OTHER
                               }`}
                             >
                               <div>
                                 <div className="flex items-center justify-between gap-1">
-                                  <span className={`text-[9px] font-mono px-1.5 py-0.5 rounded font-bold uppercase bg-black/8 dark:bg-white/10`}>
+                                  <span className={`text-[9px] font-mono px-1.5 py-0.5 rounded font-bold uppercase bg-black/5`}>
                                     {task.category}
                                   </span>
                                   <div className="flex items-center gap-0.5">
                                     <button
                                       onClick={e => { e.stopPropagation(); sound.playComplete(); onToggleComplete && onToggleComplete(task.id); }}
-                                      className={`p-0.5 rounded transition-colors cursor-pointer ${task.isCompleted ? 'text-emerald-600 dark:text-emerald-400' : 'text-slate-400 hover:text-emerald-600'}`}
+                                      className={`p-0.5 rounded transition-colors cursor-pointer ${task.isCompleted ? 'text-emerald-600' : 'text-slate-400 hover:text-emerald-600'}`}
                                     >
                                       <CheckCircle2 className="w-3.5 h-3.5" />
                                     </button>
@@ -178,9 +178,9 @@ export default function WeeklyCalendar({ tasks = [], onToggleComplete, onDeleteT
                                   {task.title}
                                 </div>
                               </div>
-                              <div className="flex items-center justify-between text-[9px] font-mono pt-1 border-t border-black/10 dark:border-white/10">
+                              <div className="flex items-center justify-between text-[9px] font-mono pt-1 border-t border-slate-200">
                                 <span className="opacity-70">{task.userEstimatedMinutes}m → <strong>{task.predictedDurationMinutes}m</strong></span>
-                                <span className="font-bold text-amber-600 dark:text-amber-400">×{task.polymorphicMultiplier}</span>
+                                <span className="font-bold text-amber-700">×{task.polymorphicMultiplier}</span>
                               </div>
                             </div>
                           ) : (

@@ -15,7 +15,7 @@ export default function HeaderBar({ isDarkMode, onToggleDarkMode, onOpenCommandB
           Good Morning, Nithish! <span className="animate-bounce inline-block">👋</span>
         </h1>
         <div className="flex items-center gap-3 mt-1">
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/20 text-xs font-mono font-bold">
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-purple-500/10 text-purple-600 border border-purple-500/20 text-xs font-mono font-bold">
             <CalendarIcon className="w-3 h-3 text-purple-500" />
             {todayString}
           </span>

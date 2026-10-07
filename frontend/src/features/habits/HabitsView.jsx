@@ -195,7 +195,7 @@ export default function HabitsView() {
               <span>Today's Progress</span>
               <span className="font-extrabold text-[var(--text-primary)]">{todayDone}/{todayTotal}</span>
             </div>
-            <div className="w-full h-2 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden">
+            <div className="w-full h-2 rounded-full bg-slate-200 overflow-hidden">
               <div
                 className="h-full rounded-full bg-gradient-to-r from-purple-600 to-indigo-500 transition-all duration-500"
                 style={{ width: `${todayTotal > 0 ? (todayDone / todayTotal) * 100 : 0}%` }}
@@ -218,7 +218,7 @@ export default function HabitsView() {
                 {DAYS.map((day, i) => {
                   const isToday = weekDates[i] === todayStr;
                   return (
-                    <th key={day} className={`text-center text-[11px] font-bold pb-3 w-12 ${isToday ? 'text-purple-600 dark:text-purple-400' : 'text-[var(--text-secondary)]'}`}>
+                    <th key={day} className={`text-center text-[11px] font-bold pb-3 w-12 ${isToday ? 'text-purple-600' : 'text-[var(--text-secondary)]'}`}>
                       {day}
                       {isToday && <div className="w-1.5 h-1.5 rounded-full bg-purple-600 mx-auto mt-0.5" />}
                     </th>

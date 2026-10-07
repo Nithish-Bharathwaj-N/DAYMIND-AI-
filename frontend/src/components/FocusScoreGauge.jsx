@@ -53,7 +53,7 @@ export default function FocusScoreGauge({ tasks = [] }) {
 
         {/* Text Details */}
         <div className="space-y-1">
-          <div className="text-base font-extrabold text-purple-600 dark:text-purple-400">
+          <div className="text-base font-extrabold text-purple-600">
             {percent >= 70 ? 'Great Focus!' : 'Good Focus!'}
           </div>
           <p className="text-xs text-[var(--text-secondary)] font-medium">

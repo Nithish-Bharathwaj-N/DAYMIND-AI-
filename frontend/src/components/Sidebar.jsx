@@ -62,7 +62,7 @@ export default function Sidebar({ activeTab, onSelectTab, isDarkMode, onToggleDa
 
                 {item.badge && (
                   <span className={`text-[9px] font-mono px-1.5 py-0.5 rounded font-extrabold ${
-                    isActive ? 'bg-white/20 text-white' : 'bg-purple-500/15 text-purple-600 dark:text-purple-400'
+                    isActive ? 'bg-white/20 text-white' : 'bg-purple-500/15 text-purple-600'
                   }`}>
                     {item.badge}
                   </span>
@@ -78,7 +78,7 @@ export default function Sidebar({ activeTab, onSelectTab, isDarkMode, onToggleDa
         
         {/* Upgrade to Pro Card */}
         <div className="p-3.5 rounded-2xl bg-gradient-to-tr from-purple-600/15 to-indigo-600/10 border border-purple-500/20 space-y-2">
-          <div className="flex items-center gap-1.5 text-xs font-black text-purple-600 dark:text-purple-300">
+          <div className="flex items-center gap-1.5 text-xs font-black text-purple-600">
             <Sparkles className="w-3.5 h-3.5 text-amber-500" />
             <span>Upgrade to Pro</span>
           </div>

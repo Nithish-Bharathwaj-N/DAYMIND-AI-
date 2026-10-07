@@ -11,10 +11,10 @@ const TIME_OF_DAY = () => {
 };
 
 const TYPE_STYLES = {
-  WARNING: 'bg-red-500/10 text-red-700 dark:text-red-300 border-red-500/20',
-  TIP:     'bg-purple-500/10 text-purple-700 dark:text-purple-300 border-purple-500/20',
-  INFO:    'bg-blue-500/10 text-blue-700 dark:text-blue-300 border-blue-500/20',
-  SUCCESS: 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-500/20',
+  WARNING: 'bg-red-50 text-red-700 border-red-200',
+  TIP:     'bg-purple-50 text-purple-700 border-purple-200',
+  INFO:    'bg-blue-50 text-blue-700 border-blue-200',
+  SUCCESS: 'bg-emerald-50 text-emerald-700 border-emerald-200',
 };
 
 /**
@@ -160,7 +160,7 @@ export default function AiSuggestionsWidget({ tasks = [], onOptimizeClick, onVie
         <h3 className="text-sm font-extrabold text-[var(--text-primary)] flex items-center gap-2">
           <Brain className="w-4 h-4 text-purple-600" />
           <span>AI Insights</span>
-          <span className="text-[9px] bg-purple-500/10 text-purple-600 dark:text-purple-400 px-1.5 py-0.5 rounded-full font-bold border border-purple-500/20">
+          <span className="text-[9px] bg-purple-500/10 text-purple-600 px-1.5 py-0.5 rounded-full font-bold border border-purple-500/20">
             {tasks.length} tasks
           </span>
         </h3>
@@ -209,7 +209,7 @@ export default function AiSuggestionsWidget({ tasks = [], onOptimizeClick, onVie
       <div className="pt-1 text-center">
         <button
           onClick={() => { sound.playClick?.(); onViewAllInsights?.(); }}
-          className="text-xs font-bold text-purple-600 dark:text-purple-400 hover:text-purple-500 transition-colors inline-flex items-center gap-1 cursor-pointer"
+          className="text-xs font-bold text-purple-600 hover:text-purple-500 transition-colors inline-flex items-center gap-1 cursor-pointer"
         >
           <span>Full Analytics Dashboard</span>
           <ChevronRight className="w-3.5 h-3.5" />

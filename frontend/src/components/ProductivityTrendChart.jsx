@@ -72,7 +72,7 @@ export default function ProductivityTrendChart({ tasks = [] }) {
             Today: <strong className="text-purple-600">{Math.floor(todayMins / 60)}h {todayMins % 60}m</strong>
           </span>
           <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-[var(--text-secondary)] bg-[var(--tag-bg)] border border-[var(--tag-border)] px-2.5 py-1 rounded-lg">
-            Avg: <span className="text-purple-600 dark:text-purple-400">{avgVal}%</span>
+            Avg: <span className="text-purple-600">{avgVal}%</span>
           </div>
           <button
             onClick={fetchData}
@@ -143,7 +143,7 @@ export default function ProductivityTrendChart({ tasks = [] }) {
         {/* X axis day labels */}
         <div className="flex justify-between text-[10px] font-mono text-[var(--text-secondary)] px-6 -mt-1">
           {points.map((p, i) => (
-            <span key={i} className={p.isToday ? 'font-extrabold text-purple-600 dark:text-purple-400' : ''}>
+            <span key={i} className={p.isToday ? 'font-extrabold text-purple-600' : ''}>
               {p.day}
             </span>
           ))}

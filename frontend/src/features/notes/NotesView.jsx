@@ -5,11 +5,11 @@ import { sound } from '../../utils/audio';
 const API = 'http://localhost:8080/api/notes';
 
 const NOTE_COLORS = [
-  { hex: '#fef9c3', border: 'border-amber-300/50',  bg: 'bg-amber-50 dark:bg-amber-950/20' },
-  { hex: '#dbeafe', border: 'border-blue-300/50',   bg: 'bg-blue-50 dark:bg-blue-950/20' },
-  { hex: '#f3e8ff', border: 'border-purple-300/50', bg: 'bg-purple-50 dark:bg-purple-950/20' },
-  { hex: '#dcfce7', border: 'border-emerald-300/50', bg: 'bg-emerald-50 dark:bg-emerald-950/20' },
-  { hex: '#ffe4e6', border: 'border-rose-300/50',   bg: 'bg-rose-50 dark:bg-rose-950/20' },
+  { hex: '#fef9c3', border: 'border-amber-300/50',  bg: 'bg-amber-50' },
+  { hex: '#dbeafe', border: 'border-blue-300/50',   bg: 'bg-blue-50' },
+  { hex: '#f3e8ff', border: 'border-purple-300/50', bg: 'bg-purple-50' },
+  { hex: '#dcfce7', border: 'border-emerald-300/50', bg: 'bg-emerald-50' },
+  { hex: '#ffe4e6', border: 'border-rose-300/50',   bg: 'bg-rose-50' },
   { hex: '#ffffff', border: 'border-[var(--border-color)]', bg: 'bg-[var(--bg-card)]' },
 ];
 

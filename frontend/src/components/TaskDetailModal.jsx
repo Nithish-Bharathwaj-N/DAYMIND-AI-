@@ -26,7 +26,7 @@ export default function TaskDetailModal({ isOpen, onClose, task, onToggleComplet
             <Cpu className="w-6 h-6" />
           </div>
           <div>
-            <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-purple-500/15 text-purple-600 dark:text-purple-400 border border-purple-500/30 font-bold">
+            <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-purple-50 text-purple-700 border border-purple-200 font-bold">
               Subclass: {task.taskType || 'BaseTask'}
             </span>
             <h2 className="text-lg font-extrabold text-[var(--text-primary)] leading-snug mt-1">{task.title}</h2>
@@ -36,22 +36,22 @@ export default function TaskDetailModal({ isOpen, onClose, task, onToggleComplet
         {/* Java Diagnostics Matrix */}
         <div className="space-y-3 text-xs">
           
-          <div className="p-4 rounded-xl bg-slate-500/5 border border-[var(--border-color)] space-y-2">
+          <div className="p-4 rounded-xl bg-slate-50 border border-[var(--border-color)] space-y-2">
             <div className="flex justify-between items-center text-[var(--text-secondary)] font-mono">
               <span>Category / Domain:</span>
-              <span className="text-amber-500 font-bold">{task.category || 'WORK'}</span>
+              <span className="text-amber-600 font-bold">{task.category || 'WORK'}</span>
             </div>
             <div className="flex justify-between items-center text-[var(--text-secondary)] font-mono">
               <span>Priority Rating:</span>
-              <span className="text-purple-600 dark:text-purple-400 font-bold">{task.priority || 'HIGH'}</span>
+              <span className="text-purple-700 font-bold">{task.priority || 'HIGH'}</span>
             </div>
             <div className="flex justify-between items-center text-[var(--text-secondary)] font-mono">
               <span>Polymorphic Multiplier:</span>
-              <span className="text-purple-600 dark:text-purple-400 font-bold">{task.polymorphicMultiplier || 1.25}x</span>
+              <span className="text-purple-700 font-bold">{task.polymorphicMultiplier || 1.25}x</span>
             </div>
             <div className="flex justify-between items-center text-[var(--text-secondary)] font-mono">
               <span>Flexibility Score:</span>
-              <span className="text-emerald-500 font-bold">{task.flexibilityScore ? task.flexibilityScore.toFixed(3) : '0.333'}</span>
+              <span className="text-emerald-600 font-bold">{task.flexibilityScore ? task.flexibilityScore.toFixed(3) : '0.333'}</span>
             </div>
             <div className="flex justify-between items-center text-[var(--text-secondary)] font-mono">
               <span>Assigned Slot:</span>
@@ -60,22 +60,22 @@ export default function TaskDetailModal({ isOpen, onClose, task, onToggleComplet
           </div>
 
           {/* Time Calculation Card */}
-          <div className="p-4 rounded-xl bg-purple-500/10 border border-purple-500/20 font-mono flex items-center justify-between">
+          <div className="p-4 rounded-xl bg-purple-50 border border-purple-200 font-mono flex items-center justify-between">
             <div>
               <div className="text-[var(--text-secondary)] text-[11px]">User Estimate vs Java Prediction:</div>
               <div className="text-[var(--text-primary)] font-bold mt-0.5">
                 <span className="line-through text-slate-400">{task.userEstimatedMinutes || 60} mins</span> →{' '}
-                <span className="text-amber-500 font-extrabold">{task.predictedDurationMinutes || 75} mins</span>
+                <span className="text-amber-600 font-extrabold">{task.predictedDurationMinutes || 75} mins</span>
               </div>
             </div>
-            <span className="px-2.5 py-1 rounded-full bg-purple-500/20 text-purple-600 dark:text-purple-300 font-bold text-[10px]">
+            <span className="px-2.5 py-1 rounded-full bg-purple-100 text-purple-700 font-bold text-[10px]">
               +{(task.predictedDurationMinutes || 75) - (task.userEstimatedMinutes || 60)}m Buffer
             </span>
           </div>
 
           {/* Bias Correction Notice */}
           {task.biasCorrectionNotice && (
-            <div className="p-3 rounded-xl bg-slate-500/10 border border-[var(--border-color)] text-[11px] text-[var(--text-secondary)] font-medium">
+            <div className="p-3 rounded-xl bg-slate-50 border border-[var(--border-color)] text-[11px] text-[var(--text-secondary)] font-medium">
               {task.biasCorrectionNotice}
             </div>
           )}
@@ -91,9 +91,9 @@ export default function TaskDetailModal({ isOpen, onClose, task, onToggleComplet
               if (onOptimizeTask) onOptimizeTask(task.id);
               onClose();
             }}
-            className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-purple-500/15 hover:bg-purple-500/25 text-purple-600 dark:text-purple-300 border border-purple-500/30 text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+            className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-purple-50 hover:bg-purple-100 text-purple-700 border border-purple-200 text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer"
           >
-            <Sparkles className="w-4 h-4 text-purple-500" />
+            <Sparkles className="w-4 h-4 text-purple-600" />
             <span>⚡ AI Re-Optimize Slot</span>
           </button>
 
@@ -103,9 +103,9 @@ export default function TaskDetailModal({ isOpen, onClose, task, onToggleComplet
               if (onToggleComplete) onToggleComplete(task.id);
               onClose();
             }}
-            className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+            className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer"
           >
-            <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+            <CheckCircle2 className="w-4 h-4 text-emerald-600" />
             <span>{task.isCompleted ? 'Mark Incomplete' : 'Mark Completed'}</span>
           </button>
 

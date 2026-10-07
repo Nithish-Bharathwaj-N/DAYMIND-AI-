@@ -89,8 +89,8 @@ export default function OptimizeDayModal({ isOpen, onClose, onApplyChanges }) {
           {/* Idle State */}
           {phase === 'idle' && (
             <div className="space-y-5">
-              <div className="p-4 rounded-2xl bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-500/20">
-                <p className="text-sm font-semibold text-purple-800 dark:text-purple-300 leading-relaxed">
+              <div className="p-4 rounded-2xl bg-purple-50 border border-purple-200">
+                <p className="text-sm font-semibold text-purple-800 leading-relaxed">
                   The optimizer analyzes your real scheduled tasks, identifies conflicts,
                   and moves flexible low-priority items into peak focus windows (9–11 AM, 2–4 PM)
                   while protecting your URGENT and HIGH priority work.
@@ -114,7 +114,7 @@ export default function OptimizeDayModal({ isOpen, onClose, onApplyChanges }) {
               </div>
 
               {error && (
-                <div className="flex items-center gap-2 p-3 rounded-xl bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-500/20 text-red-700 dark:text-red-400">
+                <div className="flex items-center gap-2 p-3 rounded-xl bg-red-50 border border-red-200 text-red-700">
                   <AlertTriangle className="w-4 h-4 shrink-0" />
                   <p className="text-xs font-medium">{error}</p>
                 </div>
@@ -154,12 +154,12 @@ export default function OptimizeDayModal({ isOpen, onClose, onApplyChanges }) {
               {/* Status badge */}
               <div className={`flex items-center gap-3 p-4 rounded-2xl border ${
                 result.changesCount > 0
-                  ? 'bg-purple-50 dark:bg-purple-950/20 border-purple-200 dark:border-purple-500/20'
-                  : 'bg-emerald-50 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-500/20'
+                  ? 'bg-purple-50 border-purple-200'
+                  : 'bg-emerald-50 border-emerald-200'
               }`}>
                 <span className="text-2xl">{result.changesCount > 0 ? '✨' : '✅'}</span>
                 <div>
-                  <div className={`text-sm font-extrabold ${result.changesCount > 0 ? 'text-purple-700 dark:text-purple-300' : 'text-emerald-700 dark:text-emerald-300'}`}>
+                  <div className={`text-sm font-extrabold ${result.changesCount > 0 ? 'text-purple-700' : 'text-emerald-700'}`}>
                     {result.status === 'ALREADY_OPTIMAL' ? 'Schedule Already Optimal!' : `${result.changesCount} Task${result.changesCount !== 1 ? 's' : ''} Rescheduled`}
                   </div>
                   <p className="text-xs text-[var(--text-secondary)] mt-0.5 leading-snug">{result.explanation}</p>
@@ -183,19 +183,19 @@ export default function OptimizeDayModal({ isOpen, onClose, onApplyChanges }) {
                           {change.taskTitle}
                         </span>
                         <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
-                          change.priority === 'LOW' ? 'bg-slate-100 dark:bg-slate-800 text-slate-500' :
-                          change.priority === 'MEDIUM' ? 'bg-blue-50 dark:bg-blue-950/30 text-blue-600' :
-                          'bg-amber-50 dark:bg-amber-950/30 text-amber-600'
+                          change.priority === 'LOW' ? 'bg-slate-100 text-slate-500' :
+                          change.priority === 'MEDIUM' ? 'bg-blue-50 text-blue-600' :
+                          'bg-amber-50 text-amber-600'
                         }`}>
                           {change.priority}
                         </span>
                       </div>
                       <div className="flex items-center gap-2 font-mono text-xs">
-                        <span className="px-2 py-1 rounded-lg bg-red-50 dark:bg-red-950/20 text-red-600 border border-red-200/50 dark:border-red-800/30 font-bold">
+                        <span className="px-2 py-1 rounded-lg bg-red-50 text-red-600 border border-red-200/50 font-bold">
                           {change.fromSlot}
                         </span>
                         <ArrowRight className="w-3 h-3 text-[var(--text-muted)]" />
-                        <span className="px-2 py-1 rounded-lg bg-emerald-50 dark:bg-emerald-950/20 text-emerald-600 border border-emerald-200/50 dark:border-emerald-800/30 font-bold">
+                        <span className="px-2 py-1 rounded-lg bg-emerald-50 text-emerald-600 border border-emerald-200/50 font-bold">
                           {change.toSlot}
                         </span>
                       </div>

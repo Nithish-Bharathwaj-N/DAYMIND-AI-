@@ -4,13 +4,13 @@ import { sound } from '../utils/audio';
 import { getTodayShortDate, getCurrentDayName } from '../utils/dateUtils';
 
 const CATEGORY_META = {
-  ACADEMIC: { label: 'Academic', color: 'bg-purple-500/15 text-purple-700 dark:text-purple-300 border-purple-500/30', bar: '#8b5cf6' },
-  WORK:     { label: 'Work',     color: 'bg-blue-500/15 text-blue-700 dark:text-blue-300 border-blue-500/30',       bar: '#3b82f6' },
-  HEALTH:   { label: 'Health',   color: 'bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border-emerald-500/30', bar: '#10b981' },
-  PERSONAL: { label: 'Personal', color: 'bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-500/30',  bar: '#f59e0b' },
-  URGENT:   { label: 'Urgent',   color: 'bg-red-500/15 text-red-700 dark:text-red-300 border-red-500/30',          bar: '#ef4444' },
-  LEARNING: { label: 'Learning', color: 'bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border-cyan-500/30',      bar: '#06b6d4' },
-  OTHER:    { label: 'Other',    color: 'bg-slate-500/15 text-slate-600 dark:text-slate-300 border-slate-500/30',  bar: '#64748b' },
+  ACADEMIC: { label: 'Academic', color: 'bg-purple-50 text-purple-700 border-purple-200', bar: '#8b5cf6' },
+  WORK:     { label: 'Work',     color: 'bg-blue-50 text-blue-700 border-blue-200',       bar: '#3b82f6' },
+  HEALTH:   { label: 'Health',   color: 'bg-emerald-50 text-emerald-700 border-emerald-200', bar: '#10b981' },
+  PERSONAL: { label: 'Personal', color: 'bg-amber-50 text-amber-700 border-amber-200',  bar: '#f59e0b' },
+  URGENT:   { label: 'Urgent',   color: 'bg-red-50 text-red-700 border-red-200',          bar: '#ef4444' },
+  LEARNING: { label: 'Learning', color: 'bg-cyan-50 text-cyan-700 border-cyan-200',      bar: '#06b6d4' },
+  OTHER:    { label: 'Other',    color: 'bg-slate-100 text-slate-700 border-slate-200',  bar: '#64748b' },
 };
 
 export default function ScheduleTimeline({ backendTasks = [], onToggleComplete, onDeleteTask, onSelectTask, onOptimizeClick, onStartFocus }) {
@@ -60,18 +60,18 @@ export default function ScheduleTimeline({ backendTasks = [], onToggleComplete, 
 
       {/* Hero Current Focus HUD Banner */}
       {activeTask && !activeTask.isCompleted && (
-        <div className="p-4 rounded-2xl bg-gradient-to-r from-purple-950/60 via-indigo-950/40 to-slate-900 border border-purple-500/30 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-lg shadow-purple-500/10">
+        <div className="p-4 rounded-2xl bg-gradient-to-r from-purple-50 via-indigo-50 to-slate-100 border border-purple-200 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-sm shadow-purple-500/10">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-purple-500 animate-pulse" />
-              <span className="text-[10px] font-mono font-black tracking-wider text-purple-400 uppercase">CURRENT FOCUS · NOW</span>
+              <span className="w-2 h-2 rounded-full bg-purple-600 animate-pulse" />
+              <span className="text-[10px] font-mono font-black tracking-wider text-purple-700 uppercase">CURRENT FOCUS · NOW</span>
             </div>
-            <h3 className="text-base font-extrabold text-white leading-snug">{activeTask.title}</h3>
-            <div className="flex items-center gap-3 text-[11px] text-slate-300 font-medium">
+            <h3 className="text-base font-extrabold text-slate-900 leading-snug">{activeTask.title}</h3>
+            <div className="flex items-center gap-3 text-[11px] text-slate-600 font-medium">
               <span>{formatHour(activeTask.assignedHourSlot)} – {formatEndTime(activeTask.assignedHourSlot, activeTask.predictedDurationMinutes)}</span>
               <span>•</span>
-              <span className="text-purple-300 font-bold">{activeTask.predictedDurationMinutes || activeTask.userEstimatedMinutes || 60} mins</span>
-              <span className="px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 text-[10px] font-mono font-bold border border-purple-500/30">
+              <span className="text-purple-700 font-bold">{activeTask.predictedDurationMinutes || activeTask.userEstimatedMinutes || 60} mins</span>
+              <span className="px-2 py-0.5 rounded-full bg-purple-100 text-purple-700 text-[10px] font-mono font-bold border border-purple-200">
                 {activeTask.category || 'WORK'}
               </span>
             </div>
@@ -81,7 +81,7 @@ export default function ScheduleTimeline({ backendTasks = [], onToggleComplete, 
               sound.playClick();
               onStartFocus && onStartFocus(activeTask);
             }}
-            className="px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-extrabold text-xs transition-all shadow-md shadow-purple-600/30 flex items-center justify-center gap-2 cursor-pointer shrink-0"
+            className="px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-extrabold text-xs transition-all shadow-md shadow-purple-600/20 flex items-center justify-center gap-2 cursor-pointer shrink-0"
           >
             <Target className="w-4 h-4 text-amber-300 animate-pulse" />
             <span>START FOCUS HUD</span>
@@ -113,7 +113,7 @@ export default function ScheduleTimeline({ backendTasks = [], onToggleComplete, 
               sound.playClick();
               onOptimizeClick && onOptimizeClick();
             }}
-            className="px-3 py-1.5 rounded-xl bg-purple-500/10 hover:bg-purple-500/20 text-purple-600 dark:text-purple-300 border border-purple-500/30 text-xs font-extrabold transition-all flex items-center gap-1.5 cursor-pointer"
+            className="px-3 py-1.5 rounded-xl bg-purple-500/10 hover:bg-purple-500/20 text-purple-600 border border-purple-500/30 text-xs font-extrabold transition-all flex items-center gap-1.5 cursor-pointer"
           >
             <Sparkles className="w-3.5 h-3.5 text-amber-500" />
             <span>Optimize</span>
@@ -146,7 +146,7 @@ export default function ScheduleTimeline({ backendTasks = [], onToggleComplete, 
 
       {/* Timeline */}
       {!isEmpty && (
-        <div className="space-y-2 relative pl-4 border-l-2 border-slate-200 dark:border-slate-700/50 max-h-[460px] overflow-y-auto pr-2">
+        <div className="space-y-2 relative pl-4 border-l-2 border-slate-200 max-h-[460px] overflow-y-auto pr-2">
           {sortedTasks.map((task) => {
             const isCurrent = task.assignedHourSlot === currentHour;
             const meta = CATEGORY_META[task.category] || CATEGORY_META.OTHER;
@@ -174,13 +174,13 @@ export default function ScheduleTimeline({ backendTasks = [], onToggleComplete, 
                       ? 'bg-emerald-500'
                       : isCurrent
                       ? 'bg-purple-600 ring-4 ring-purple-600/20'
-                      : 'bg-slate-300 dark:bg-slate-600'
+                      : 'bg-slate-300'
                   }`}
                 />
 
                 {/* Time */}
                 <div className={`w-16 text-[10px] font-mono font-semibold shrink-0 pt-2.5 ${
-                  isCurrent ? 'text-purple-600 dark:text-purple-400' : 'text-[var(--text-muted)]'
+                  isCurrent ? 'text-purple-600 font-bold' : 'text-[var(--text-muted)]'
                 }`}>
                   {startTime}
                 </div>
@@ -188,10 +188,10 @@ export default function ScheduleTimeline({ backendTasks = [], onToggleComplete, 
                 {/* Card */}
                 <div className={`flex-1 p-3 rounded-xl border transition-all group-hover:shadow-sm mb-2 relative overflow-hidden ${
                   (task.isCompleted || task.completed)
-                    ? 'bg-slate-50 dark:bg-slate-800/30 border-slate-200 dark:border-slate-700/50 opacity-55'
+                    ? 'bg-slate-50 border-slate-200 opacity-60'
                     : isCurrent
-                    ? 'bg-purple-50 dark:bg-purple-950/30 border-purple-200 dark:border-purple-500/30 shadow-sm shadow-purple-500/10'
-                    : 'bg-[var(--bg-card)] border-[var(--border-color)] hover:border-purple-300/50'
+                    ? 'bg-purple-50/70 border-purple-200 shadow-sm shadow-purple-500/10'
+                    : 'bg-[var(--bg-card)] border-[var(--border-color)] hover:border-purple-300'
                 }`}>
                   {/* Left accent bar */}
                   <div
@@ -212,18 +212,18 @@ export default function ScheduleTimeline({ backendTasks = [], onToggleComplete, 
                           {startTime} → {endTime}
                         </span>
                         {isCurrent && !(task.isCompleted || task.completed) && (
-                          <span className="text-[10px] font-bold text-purple-600 dark:text-purple-400 flex items-center gap-0.5">
+                          <span className="text-[10px] font-bold text-purple-600 flex items-center gap-0.5">
                             <span className="w-1.5 h-1.5 rounded-full bg-purple-600 animate-pulse inline-block" /> Now
                           </span>
                         )}
                         {task.priority === 'URGENT' && (
-                          <span className="text-[10px] font-bold text-red-600 bg-red-50 dark:bg-red-950/30 px-1.5 py-0.5 rounded-md border border-red-200 dark:border-red-800/50">
+                          <span className="text-[10px] font-bold text-red-600 bg-red-50 px-1.5 py-0.5 rounded-md border border-red-200">
                             🚨 URGENT
                           </span>
                         )}
                       </div>
                       {task.biasCorrectionNotice && (
-                        <div className="mt-1 text-[10px] text-amber-600 dark:text-amber-400 font-mono font-medium">
+                        <div className="mt-1 text-[10px] text-amber-600 font-mono font-medium">
                           ⚡ {task.biasCorrectionNotice}
                         </div>
                       )}

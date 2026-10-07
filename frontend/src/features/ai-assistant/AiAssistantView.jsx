@@ -154,7 +154,7 @@ export default function AiAssistantView({ tasks = [] }) {
             <div className={`w-8 h-8 rounded-xl flex items-center justify-center text-xs font-bold shrink-0 ${
               msg.sender === 'user'
                 ? 'bg-gradient-to-tr from-purple-600 to-indigo-500 text-white'
-                : 'bg-purple-500/10 text-purple-600 dark:text-purple-400'
+                : 'bg-purple-500/10 text-purple-600'
             }`}>
               {msg.sender === 'user' ? <User className="w-4 h-4" /> : <Bot className="w-4 h-4" />}
             </div>
@@ -162,7 +162,7 @@ export default function AiAssistantView({ tasks = [] }) {
               msg.sender === 'user'
                 ? 'bg-purple-600 text-white px-4 py-3 rounded-tr-none'
                 : msg.isError
-                ? 'bg-red-500/8 border border-red-500/20 text-red-700 dark:text-red-300 px-4 py-3 rounded-tl-none'
+                ? 'bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-tl-none'
                 : 'bg-[var(--bg-input)] border border-[var(--border-color)] text-[var(--text-primary)] px-4 py-3 rounded-tl-none'
             }`}>
               <div className="font-medium space-y-1">
@@ -177,7 +177,7 @@ export default function AiAssistantView({ tasks = [] }) {
 
         {isTyping && (
           <div className="flex items-start gap-3">
-            <div className="w-8 h-8 rounded-xl bg-purple-500/10 text-purple-600 dark:text-purple-400 flex items-center justify-center shrink-0">
+            <div className="w-8 h-8 rounded-xl bg-purple-500/10 text-purple-600 flex items-center justify-center shrink-0">
               <Bot className="w-4 h-4" />
             </div>
             <div className="bg-[var(--bg-input)] border border-[var(--border-color)] rounded-2xl rounded-tl-none">
@@ -197,7 +197,7 @@ export default function AiAssistantView({ tasks = [] }) {
               key={i}
               onClick={() => { handleSend(qp.text); }}
               disabled={isTyping}
-              className="px-3 py-1.5 rounded-xl bg-[var(--bg-input)] hover:bg-[var(--accent-purple-light)] border border-[var(--border-color)] hover:border-purple-500/40 text-xs font-semibold text-[var(--text-secondary)] hover:text-purple-700 dark:hover:text-purple-300 transition-all cursor-pointer flex items-center gap-1.5 disabled:opacity-50"
+              className="px-3 py-1.5 rounded-xl bg-[var(--bg-input)] hover:bg-[var(--accent-purple-light)] border border-[var(--border-color)] hover:border-purple-500/40 text-xs font-semibold text-[var(--text-secondary)] hover:text-purple-700 transition-all cursor-pointer flex items-center gap-1.5 disabled:opacity-50"
             >
               <span>{qp.icon}</span>
               <span>{qp.text}</span>

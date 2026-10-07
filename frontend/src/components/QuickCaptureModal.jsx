@@ -39,7 +39,7 @@ export default function QuickCaptureModal({ isOpen, onClose, initialType = 'Task
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 p-2 rounded-full bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white transition-all cursor-pointer"
+          className="absolute top-5 right-5 p-2 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800 transition-all cursor-pointer"
         >
           <X className="w-5 h-5" />
         </button>
@@ -51,7 +51,7 @@ export default function QuickCaptureModal({ isOpen, onClose, initialType = 'Task
         </div>
 
         {/* Type Selector Tabs */}
-        <div className="flex items-center gap-1.5 p-1 rounded-xl bg-slate-500/10 text-xs font-semibold">
+        <div className="flex items-center gap-1.5 p-1 rounded-xl bg-slate-100 border border-slate-200 text-xs font-semibold">
           {[
             { label: 'Task', icon: CheckSquare },
             { label: 'Note', icon: FileText },
@@ -88,7 +88,7 @@ export default function QuickCaptureModal({ isOpen, onClose, initialType = 'Task
               onChange={(e) => setTitle(e.target.value)}
               placeholder={`Enter ${type.toLowerCase()} details...`}
               autoFocus
-              className="w-full p-3 rounded-xl bg-slate-500/10 border border-[var(--border-color)] text-[var(--text-primary)] font-semibold text-xs focus:outline-none focus:ring-2 focus:ring-purple-500/30"
+              className="w-full p-3 rounded-xl bg-slate-50 border border-[var(--border-color)] text-[var(--text-primary)] font-semibold text-xs focus:outline-none focus:ring-2 focus:ring-purple-500/30"
             />
           </div>
 
@@ -98,7 +98,7 @@ export default function QuickCaptureModal({ isOpen, onClose, initialType = 'Task
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="w-full p-2.5 rounded-xl bg-slate-500/10 border border-[var(--border-color)] text-[var(--text-primary)] font-semibold text-xs focus:outline-none"
+                className="w-full p-2.5 rounded-xl bg-slate-50 border border-[var(--border-color)] text-[var(--text-primary)] font-semibold text-xs focus:outline-none"
               >
                 <option value="WORK">Work</option>
                 <option value="ACADEMIC">Academic</option>
@@ -114,7 +114,7 @@ export default function QuickCaptureModal({ isOpen, onClose, initialType = 'Task
                 type="number"
                 value={duration}
                 onChange={(e) => setDuration(e.target.value)}
-                className="w-full p-2.5 rounded-xl bg-slate-500/10 border border-[var(--border-color)] text-[var(--text-primary)] font-semibold text-xs focus:outline-none"
+                className="w-full p-2.5 rounded-xl bg-slate-50 border border-[var(--border-color)] text-[var(--text-primary)] font-semibold text-xs focus:outline-none"
               />
             </div>
           </div>

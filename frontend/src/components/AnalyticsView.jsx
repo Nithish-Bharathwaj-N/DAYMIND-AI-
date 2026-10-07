@@ -28,26 +28,26 @@ export default function AnalyticsView({ tasks = [] }) {
     {
       label: 'Total Scheduled Tasks', value: totalTasks,
       sub: `${completedTasks} completed (${completionRate}%)`,
-      icon: Cpu, iconColor: 'text-amber-600 dark:text-amber-400',
-      subColor: 'text-amber-600 dark:text-amber-400',
+      icon: Cpu, iconColor: 'text-amber-600',
+      subColor: 'text-amber-600',
     },
     {
       label: 'Human Time Estimate', value: `${totalUserMins}`, unit: 'mins',
       sub: 'Raw uncalibrated estimates',
-      icon: Clock, iconColor: 'text-cyan-600 dark:text-cyan-400',
+      icon: Clock, iconColor: 'text-cyan-600',
       subColor: 'text-[var(--text-secondary)]',
     },
     {
       label: 'AI Polymorphic Duration', value: `${totalPredictedMins}`, unit: 'mins',
       sub: 'Calibrated with bias buffer',
-      icon: Zap, iconColor: 'text-purple-600 dark:text-purple-400',
-      subColor: 'text-purple-600 dark:text-purple-300',
+      icon: Zap, iconColor: 'text-purple-600',
+      subColor: 'text-purple-600',
     },
     {
       label: 'Burnout Buffer Saved', value: `+${bufferAddedMins}`, unit: 'mins',
       sub: 'Prevented underestimation',
-      icon: ShieldCheck, iconColor: 'text-emerald-600 dark:text-emerald-400',
-      subColor: 'text-emerald-600 dark:text-emerald-300',
+      icon: ShieldCheck, iconColor: 'text-emerald-600',
+      subColor: 'text-emerald-600',
     },
   ];
 
@@ -68,7 +68,7 @@ export default function AnalyticsView({ tasks = [] }) {
               <p className="text-[11px] text-[var(--text-secondary)] font-medium">Quantitative Metrics Powered by Core Java Polymorphic Execution</p>
             </div>
           </div>
-          <div className="px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-700 dark:text-purple-300 font-mono text-xs font-bold flex items-center gap-2">
+          <div className="px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-700 font-mono text-xs font-bold flex items-center gap-2">
             <Sparkles className="w-4 h-4" />
             <span>Bias Reduction Engine 98.5% Effective</span>
           </div>
@@ -101,7 +101,7 @@ export default function AnalyticsView({ tasks = [] }) {
         {/* Left: Focus Score + Energy Heatmap */}
         <div className="glass-card p-6 space-y-5">
           <div className="flex items-center gap-3 pb-3 border-b border-[var(--border-color)]">
-            <Award className="w-5 h-5 text-amber-600 dark:text-amber-400" />
+            <Award className="w-5 h-5 text-amber-600" />
             <h3 className="font-extrabold text-[var(--text-primary)] text-sm">Planning Fallacy Defeat Gauge</h3>
           </div>
 
@@ -109,7 +109,7 @@ export default function AnalyticsView({ tasks = [] }) {
             <div className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-500 via-purple-500 to-cyan-500">
               {fallacyMetrics?.planningAccuracyScore || 96}%
             </div>
-            <div className="text-xs text-purple-700 dark:text-purple-300 font-mono font-bold mt-1 uppercase tracking-wider">
+            <div className="text-xs text-purple-700 font-mono font-bold mt-1 uppercase tracking-wider">
               Planning Accuracy (Average Bias: {fallacyMetrics?.averageBiasPercent || '+5.6%'})
             </div>
             <p className="text-xs text-[var(--text-secondary)] mt-2 max-w-sm mx-auto leading-relaxed">
@@ -120,13 +120,13 @@ export default function AnalyticsView({ tasks = [] }) {
           {/* Energy Heatmap */}
           <div className="space-y-3">
             <h4 className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider flex items-center gap-2">
-              <Zap className="w-4 h-4 text-amber-600 dark:text-amber-400" />
+              <Zap className="w-4 h-4 text-amber-600" />
               <span>Cognitive Energy Heatmap</span>
             </h4>
             <div className="grid grid-cols-3 gap-2 text-xs">
               {[
-                { time: '9:00 - 12:00', label: '⚡ Peak Focus (100%)', note: 'Academic & Urgent', color: 'bg-amber-500/10 border-amber-500/25', timeColor: 'text-amber-600 dark:text-amber-400' },
-                { time: '1:00 - 4:00', label: '🔋 Moderate (75%)', note: 'Work & Learning', color: 'bg-cyan-500/10 border-cyan-500/25', timeColor: 'text-cyan-600 dark:text-cyan-400' },
+                { time: '9:00 - 12:00', label: '⚡ Peak Focus (100%)', note: 'Academic & Urgent', color: 'bg-amber-500/10 border-amber-500/25', timeColor: 'text-amber-600' },
+                { time: '1:00 - 4:00', label: '🔋 Moderate (75%)', note: 'Work & Learning', color: 'bg-cyan-500/10 border-cyan-500/25', timeColor: 'text-cyan-600' },
                 { time: '5:00 - 8:00', label: '🪫 Low Energy (40%)', note: 'Personal & Health', color: 'bg-slate-500/10 border-slate-400/20', timeColor: 'text-[var(--text-secondary)]' },
               ].map((slot) => (
                 <div key={slot.time} className={`p-3 rounded-xl border ${slot.color}`}>
@@ -143,7 +143,7 @@ export default function AnalyticsView({ tasks = [] }) {
         <div className="glass-card p-6 space-y-5">
           <div className="flex items-center justify-between pb-3 border-b border-[var(--border-color)]">
             <div className="flex items-center gap-3">
-              <Layers className="w-5 h-5 text-cyan-600 dark:text-cyan-400" />
+              <Layers className="w-5 h-5 text-cyan-600" />
               <h3 className="font-extrabold text-[var(--text-primary)] text-sm">Category Time Allocation</h3>
             </div>
             <span className="text-xs font-mono text-[var(--text-secondary)]">{tasks.length} tasks</span>

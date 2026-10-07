@@ -137,8 +137,8 @@ export default function CommandBar({ isOpen, onClose, onTaskCreated, onGenerateR
 
         {/* AI Command Feedback Banner */}
         {feedback && (
-          <div className="p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300 text-xs font-mono flex items-center gap-2 animate-slide-down">
-            <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+          <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-mono flex items-center gap-2 animate-slide-down">
+            <CheckCircle2 className="w-4 h-4 text-emerald-600" />
             <span>{feedback}</span>
           </div>
         )}

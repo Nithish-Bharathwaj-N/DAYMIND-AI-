@@ -3,13 +3,13 @@ import { Clock, CheckCircle2, Trash2, Play, AlertCircle } from 'lucide-react';
 import { sound } from '../utils/audio';
 
 const CATEGORY_META = {
-  ACADEMIC: { label: 'Academic', color: 'bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-500/30' },
-  WORK:     { label: 'Work',     color: 'bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border-cyan-500/30' },
-  HEALTH:   { label: 'Health',   color: 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-500/30' },
-  PERSONAL: { label: 'Personal', color: 'bg-slate-500/10 text-slate-600 dark:text-slate-300 border-slate-500/30' },
-  LEARNING: { label: 'Learning', color: 'bg-purple-500/10 text-purple-700 dark:text-purple-300 border-purple-500/30' },
-  URGENT:   { label: 'Urgent',   color: 'bg-red-500/10 text-red-700 dark:text-red-300 border-red-500/30' },
-  OTHER:    { label: 'Other',    color: 'bg-slate-500/10 text-slate-600 dark:text-slate-300 border-slate-500/30' },
+  ACADEMIC: { label: 'Academic', color: 'bg-amber-50 text-amber-800 border-amber-200' },
+  WORK:     { label: 'Work',     color: 'bg-cyan-50 text-cyan-800 border-cyan-200' },
+  HEALTH:   { label: 'Health',   color: 'bg-emerald-50 text-emerald-800 border-emerald-200' },
+  PERSONAL: { label: 'Personal', color: 'bg-slate-100 text-slate-800 border-slate-200' },
+  LEARNING: { label: 'Learning', color: 'bg-purple-50 text-purple-800 border-purple-200' },
+  URGENT:   { label: 'Urgent',   color: 'bg-red-50 text-red-800 border-red-200' },
+  OTHER:    { label: 'Other',    color: 'bg-slate-100 text-slate-800 border-slate-200' },
 };
 
 const PRIORITY_DOT = {
@@ -32,8 +32,8 @@ export default function KanbanBoardView({ tasks = [], onToggleComplete, onDelete
         onClick={() => { sound.playClick(); onSelectTask && onSelectTask(task); }}
         className={`p-4 rounded-xl border transition-all shadow-sm hover:shadow-md cursor-pointer group space-y-2.5 ${
           isDone
-            ? 'bg-emerald-50 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-500/25 opacity-75'
-            : 'bg-[var(--bg-card)] border-[var(--border-color)] hover:border-purple-400/40 hover:scale-[1.01]'
+            ? 'bg-emerald-50/50 border-emerald-200 opacity-80'
+            : 'bg-[var(--bg-card)] border-[var(--border-color)] hover:border-purple-300 hover:scale-[1.01]'
         }`}
       >
         {/* Title row */}
@@ -41,7 +41,7 @@ export default function KanbanBoardView({ tasks = [], onToggleComplete, onDelete
           <div className="flex items-center gap-2 min-w-0">
             <div className={`w-2 h-2 rounded-full shrink-0 mt-0.5 ${priorityDot}`} />
             <h4 className={`text-xs font-bold leading-snug ${
-              isDone ? 'line-through text-[var(--text-muted)]' : 'text-[var(--text-primary)] group-hover:text-purple-600 dark:group-hover:text-purple-400'
+              isDone ? 'line-through text-[var(--text-muted)]' : 'text-[var(--text-primary)] group-hover:text-purple-600'
             } transition-colors truncate`}>
               {task.title}
             </h4>
@@ -58,12 +58,12 @@ export default function KanbanBoardView({ tasks = [], onToggleComplete, onDelete
             {task.assignedHourSlot ? `${task.assignedHourSlot}:00` : '—'}
             {' '}&bull;{' '}
             <span className="line-through text-[var(--text-muted)]">{task.userEstimatedMinutes}m</span>
-            {' '}→ <span className="font-bold text-purple-600 dark:text-purple-400">{task.predictedDurationMinutes}m</span>
+            {' '}→ <span className="font-bold text-purple-700">{task.predictedDurationMinutes}m</span>
           </span>
         </div>
 
         {task.biasCorrectionNotice && (
-          <div className="text-[10px] font-mono text-amber-600 dark:text-amber-400 font-medium">
+          <div className="text-[10px] font-mono text-amber-700 font-medium">
             ⚡ {task.biasCorrectionNotice}
           </div>
         )}
@@ -76,23 +76,23 @@ export default function KanbanBoardView({ tasks = [], onToggleComplete, onDelete
           >
             <button
               onClick={() => { sound.playClick(); onOpenFocusTimer && onOpenFocusTimer(task); }}
-              className="px-2.5 py-1 rounded-lg bg-purple-500/10 hover:bg-purple-500/20 text-purple-700 dark:text-purple-300 border border-purple-500/25 text-[11px] font-bold transition-all flex items-center gap-1.5 cursor-pointer"
+              className="px-2.5 py-1 rounded-lg bg-purple-50 hover:bg-purple-100 text-purple-700 border border-purple-200 text-[11px] font-bold transition-all flex items-center gap-1.5 cursor-pointer"
             >
-              <Play className="w-3 h-3 fill-purple-600 dark:fill-purple-400" />
+              <Play className="w-3 h-3 fill-purple-600 text-purple-600" />
               <span>Focus HUD</span>
             </button>
 
             <div className="flex items-center gap-1.5">
               <button
                 onClick={() => { sound.playComplete(); onToggleComplete && onToggleComplete(task.id); }}
-                className="px-2 py-1 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-500/25 text-[11px] font-bold transition-all flex items-center gap-1 cursor-pointer"
+                className="px-2 py-1 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 text-[11px] font-bold transition-all flex items-center gap-1 cursor-pointer"
               >
                 <CheckCircle2 className="w-3 h-3" />
                 <span>Done</span>
               </button>
               <button
                 onClick={() => { sound.playDelete(); onDeleteTask && onDeleteTask(task.id); }}
-                className="p-1.5 rounded-lg text-[var(--text-muted)] hover:text-red-500 hover:bg-red-500/10 transition-all cursor-pointer"
+                className="p-1.5 rounded-lg text-[var(--text-muted)] hover:text-red-500 hover:bg-red-50 transition-all cursor-pointer"
               >
                 <Trash2 className="w-3.5 h-3.5" />
               </button>
@@ -105,7 +105,7 @@ export default function KanbanBoardView({ tasks = [], onToggleComplete, onDelete
             className="flex items-center justify-between pt-2 border-t border-[var(--border-color)] text-xs"
             onClick={e => e.stopPropagation()}
           >
-            <span className="text-[10px] font-mono font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
+            <span className="text-[10px] font-mono font-bold text-emerald-700 flex items-center gap-1">
               <CheckCircle2 className="w-3.5 h-3.5" /> Completed
             </span>
             <button
@@ -154,10 +154,10 @@ export default function KanbanBoardView({ tasks = [], onToggleComplete, onDelete
         <div className="glass-card p-5 space-y-4">
           <div className="flex items-center justify-between pb-3 border-b border-[var(--border-color)]">
             <div className="flex items-center gap-2">
-              <div className="w-2.5 h-2.5 rounded-full bg-amber-400" />
+              <div className="w-2.5 h-2.5 rounded-full bg-amber-500" />
               <h3 className="font-bold text-[var(--text-primary)] text-sm">📌 Pending & Scheduled</h3>
             </div>
-            <span className="text-[11px] font-mono font-bold px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-700 dark:text-amber-300 border border-amber-500/25">
+            <span className="text-[11px] font-mono font-bold px-2 py-0.5 rounded-full bg-amber-50 text-amber-700 border border-amber-200">
               {pendingTasks.length}
             </span>
           </div>
@@ -173,10 +173,10 @@ export default function KanbanBoardView({ tasks = [], onToggleComplete, onDelete
         <div className="glass-card p-5 space-y-4">
           <div className="flex items-center justify-between pb-3 border-b border-[var(--border-color)]">
             <div className="flex items-center gap-2">
-              <div className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
+              <div className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
               <h3 className="font-bold text-[var(--text-primary)] text-sm">✓ Accomplished</h3>
             </div>
-            <span className="text-[11px] font-mono font-bold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/25">
+            <span className="text-[11px] font-mono font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
               {completedTasks.length}
             </span>
           </div>

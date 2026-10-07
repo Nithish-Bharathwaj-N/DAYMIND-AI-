@@ -66,7 +66,7 @@ export default function KpiCards({ tasks = [] }) {
       <div className="ui-card p-5 space-y-3">
         <div className="flex items-center justify-between">
           <span className="text-xs font-semibold text-[var(--text-secondary)]">Tasks Today</span>
-          <div className="p-2 rounded-xl bg-purple-500/15 text-purple-600 dark:text-purple-400">
+          <div className="p-2 rounded-xl bg-purple-500/15 text-purple-600">
             <CheckSquare className="w-4 h-4" />
           </div>
         </div>

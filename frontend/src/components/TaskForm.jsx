@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { Zap, AlertTriangle, Calculator, Sparkles } from 'lucide-react';
 
 const CATEGORIES = [
-  { id: 'ACADEMIC', label: 'Academic', mult: 1.25, badge: '+25% Bias', color: 'border-amber-500/40 text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-500/10' },
-  { id: 'WORK', label: 'Work', mult: 1.15, badge: '+15% Bias', color: 'border-cyan-500/40 text-cyan-700 dark:text-cyan-400 bg-cyan-50 dark:bg-cyan-500/10' },
-  { id: 'HEALTH', label: 'Health', mult: 1.30, badge: '+30% Bias', color: 'border-emerald-500/40 text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10' },
-  { id: 'PERSONAL', label: 'Personal', mult: 0.95, badge: '-5% Adj', color: 'border-slate-400/40 text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-slate-500/10' },
-  { id: 'LEARNING', label: 'Learning', mult: 1.20, badge: '+20% Ramp', color: 'border-purple-500/40 text-purple-700 dark:text-purple-300 bg-purple-50 dark:bg-purple-500/10' },
-  { id: 'URGENT', label: 'Urgent', mult: 1.00, badge: 'Preempt', color: 'border-red-500/40 text-red-700 dark:text-red-400 bg-red-50 dark:bg-red-500/10' },
+  { id: 'ACADEMIC', label: 'Academic', mult: 1.25, badge: '+25% Bias', color: 'border-amber-300 text-amber-800 bg-amber-50' },
+  { id: 'WORK', label: 'Work', mult: 1.15, badge: '+15% Bias', color: 'border-cyan-300 text-cyan-800 bg-cyan-50' },
+  { id: 'HEALTH', label: 'Health', mult: 1.30, badge: '+30% Bias', color: 'border-emerald-300 text-emerald-800 bg-emerald-50' },
+  { id: 'PERSONAL', label: 'Personal', mult: 0.95, badge: '-5% Adj', color: 'border-slate-300 text-slate-700 bg-slate-100' },
+  { id: 'LEARNING', label: 'Learning', mult: 1.20, badge: '+20% Ramp', color: 'border-purple-300 text-purple-800 bg-purple-50' },
+  { id: 'URGENT', label: 'Urgent', mult: 1.00, badge: 'Preempt', color: 'border-red-300 text-red-800 bg-red-50' },
 ];
 
 const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
@@ -47,7 +47,7 @@ export default function TaskForm({ onTaskCreated, isSubmitting }) {
       {/* Header */}
       <div className="flex items-center justify-between mb-5 pb-3 border-b border-[var(--border-color)]">
         <div className="flex items-center gap-3">
-          <div className="p-2 rounded-xl bg-amber-500/10 border border-amber-500/25 text-amber-600 dark:text-amber-400">
+          <div className="p-2 rounded-xl bg-amber-500/10 border border-amber-500/25 text-amber-600">
             <Zap className="w-5 h-5" />
           </div>
           <div>
@@ -55,7 +55,7 @@ export default function TaskForm({ onTaskCreated, isSubmitting }) {
             <p className="text-[11px] text-[var(--text-secondary)] font-medium">Polymorphic Duration Bias Correction · Smart Slot Allocation</p>
           </div>
         </div>
-        <div className="hidden sm:block text-[10px] font-mono text-purple-700 dark:text-purple-300 bg-purple-500/10 px-3 py-1 rounded-full border border-purple-500/20 font-bold">
+        <div className="hidden sm:block text-[10px] font-mono text-purple-700 bg-purple-500/10 px-3 py-1 rounded-full border border-purple-500/20 font-bold">
           Factory Pattern Active
         </div>
       </div>
@@ -146,15 +146,15 @@ export default function TaskForm({ onTaskCreated, isSubmitting }) {
         {/* Polymorphic Bias Calculator */}
         <div className="p-3.5 rounded-xl bg-[var(--bg-input)] border border-purple-500/25 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
           <div className="flex items-center gap-3">
-            <Calculator className="w-4 h-4 text-purple-600 dark:text-purple-400 shrink-0" />
+            <Calculator className="w-4 h-4 text-purple-600 shrink-0" />
             <div>
               <span className="text-[var(--text-secondary)]">AI Duration Prediction: </span>
               <span className="text-[var(--text-primary)] font-mono font-bold">{userEstimatedMinutes}m</span>
               <span className="text-[var(--text-secondary)]"> × {selectedCat.mult}x ({selectedCat.label}) = </span>
-              <span className="text-amber-600 dark:text-amber-400 font-mono font-black text-sm">{predictedMinutes}m</span>
+              <span className="text-amber-600 font-mono font-black text-sm">{predictedMinutes}m</span>
             </div>
           </div>
-          <span className="px-3 py-1 rounded-full bg-purple-500/10 text-purple-700 dark:text-purple-300 font-mono text-[10px] border border-purple-500/20 font-bold shrink-0">
+          <span className="px-3 py-1 rounded-full bg-purple-500/10 text-purple-700 font-mono text-[10px] border border-purple-500/20 font-bold shrink-0">
             {selectedCat.badge}
           </span>
         </div>
@@ -165,7 +165,7 @@ export default function TaskForm({ onTaskCreated, isSubmitting }) {
             type="button"
             onClick={(e) => handleSubmit(e, true)}
             disabled={isSubmitting || !title.trim()}
-            className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-red-500/10 hover:bg-red-500/20 text-red-700 dark:text-red-400 border border-red-500/25 text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+            className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-red-500/10 hover:bg-red-500/20 text-red-700 border border-red-500/25 text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
           >
             <AlertTriangle className="w-4 h-4" />
             <span>Add Urgent (Dynamic Replan)</span>
@@ -174,7 +174,7 @@ export default function TaskForm({ onTaskCreated, isSubmitting }) {
           <button
             type="submit"
             disabled={isSubmitting || !title.trim()}
-            className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-white dark:text-slate-950 text-xs font-black transition-all flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20 cursor-pointer disabled:opacity-50"
+            className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-white text-xs font-black transition-all flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20 cursor-pointer disabled:opacity-50"
           >
             {isSubmitting ? (
               <span className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />

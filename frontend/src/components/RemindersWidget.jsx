@@ -68,7 +68,7 @@ export default function RemindersWidget({ onOpenQuickCapture, onViewAllMeetings,
             </p>
             <button
               onClick={() => { sound.playClick(); onViewAllMeetings && onViewAllMeetings(); }}
-              className="mt-1 px-3 py-1.5 rounded-lg bg-purple-500/10 text-purple-600 dark:text-purple-400 text-xs font-bold border border-purple-500/20 hover:bg-purple-500/15 transition-all cursor-pointer"
+              className="mt-1 px-3 py-1.5 rounded-lg bg-purple-500/10 text-purple-600 text-xs font-bold border border-purple-500/20 hover:bg-purple-500/15 transition-all cursor-pointer"
             >
               Analyze a Meeting →
             </button>
@@ -81,7 +81,7 @@ export default function RemindersWidget({ onOpenQuickCapture, onViewAllMeetings,
 
             {meetingSummary && (
               <div className="p-3 rounded-xl bg-purple-500/8 border border-purple-500/15 text-xs font-medium text-[var(--text-primary)] space-y-1">
-                <div className="text-[10px] font-mono font-bold text-purple-600 dark:text-purple-300 flex items-center gap-1 mb-1.5">
+                <div className="text-[10px] font-mono font-bold text-purple-600 flex items-center gap-1 mb-1.5">
                   <Sparkles className="w-3 h-3 text-amber-500" />
                   <span>AI Summary</span>
                 </div>
@@ -135,10 +135,10 @@ export default function RemindersWidget({ onOpenQuickCapture, onViewAllMeetings,
         <h3 className="text-sm font-extrabold text-[var(--text-primary)]">Quick Capture</h3>
         <div className="grid grid-cols-4 gap-2">
           {[
-            { label: 'Task', icon: CheckCircle2, color: 'bg-purple-500/10 text-purple-600 dark:text-purple-400' },
-            { label: 'Note', icon: FileText, color: 'bg-blue-500/10 text-blue-600 dark:text-blue-400' },
-            { label: 'Meeting', icon: Users, color: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400' },
-            { label: 'Reminder', icon: Bell, color: 'bg-amber-500/10 text-amber-600 dark:text-amber-400' },
+            { label: 'Task', icon: CheckCircle2, color: 'bg-purple-500/10 text-purple-600' },
+            { label: 'Note', icon: FileText, color: 'bg-blue-500/10 text-blue-600' },
+            { label: 'Meeting', icon: Users, color: 'bg-emerald-500/10 text-emerald-600' },
+            { label: 'Reminder', icon: Bell, color: 'bg-amber-500/10 text-amber-600' },
           ].map((qc) => {
             const Icon = qc.icon;
             return (

@@ -27,9 +27,9 @@ export default function UpcomingMeetingsWidget({ onViewCalendar }) {
   }, []);
 
   const BORDER_COLORS = [
-    'border-purple-500/30 bg-purple-500/5 dark:bg-purple-950/20',
-    'border-blue-500/30 bg-blue-500/5 dark:bg-blue-950/20',
-    'border-emerald-500/30 bg-emerald-500/5 dark:bg-emerald-950/20',
+    'border-purple-200 bg-purple-50',
+    'border-blue-200 bg-blue-50',
+    'border-emerald-200 bg-emerald-50',
   ];
 
   return (
@@ -51,7 +51,7 @@ export default function UpcomingMeetingsWidget({ onViewCalendar }) {
       {loading && (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
           {[1,2,3].map(i => (
-            <div key={i} className="h-24 rounded-2xl bg-slate-100 dark:bg-slate-800/40 animate-pulse" />
+            <div key={i} className="h-24 rounded-2xl bg-slate-100 animate-pulse" />
           ))}
         </div>
       )}
@@ -81,7 +81,7 @@ export default function UpcomingMeetingsWidget({ onViewCalendar }) {
                     <span>{m.startTime ? `${m.startTime} ${m.endTime ? '– ' + m.endTime : ''}` : (m.scheduledTime || m.date || 'Scheduled')}</span>
                   </div>
                 </div>
-                <div className="text-[10px] font-mono font-bold text-purple-600 dark:text-purple-300 flex items-center gap-1">
+                <div className="text-[10px] font-mono font-bold text-purple-600 flex items-center gap-1">
                   <Video className="w-3 h-3 text-purple-500" />
                   <span>{m.platform || 'Google Meet'}</span>
                 </div>

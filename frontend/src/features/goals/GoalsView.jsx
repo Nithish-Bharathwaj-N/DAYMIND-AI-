@@ -6,12 +6,12 @@ const API = 'http://localhost:8080/api/goals';
 
 const GOAL_CATEGORIES = ['CAREER', 'HEALTH', 'LEARNING', 'PERSONAL', 'ACADEMIC', 'FINANCE'];
 const CATEGORY_META = {
-  CAREER:   { label: 'Career',       icon: '💼', color: 'bg-blue-500/10 text-blue-700 dark:text-blue-300 border-blue-500/25' },
-  HEALTH:   { label: 'Health',       icon: '🏃', color: 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-500/25' },
-  LEARNING: { label: 'Learning',     icon: '📚', color: 'bg-purple-500/10 text-purple-700 dark:text-purple-300 border-purple-500/25' },
-  PERSONAL: { label: 'Personal',     icon: '🌟', color: 'bg-rose-500/10 text-rose-700 dark:text-rose-300 border-rose-500/25' },
-  ACADEMIC: { label: 'Academic',     icon: '🎓', color: 'bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border-cyan-500/25' },
-  FINANCE:  { label: 'Finance',      icon: '💰', color: 'bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-500/25' },
+  CAREER:   { label: 'Career',       icon: '💼', color: 'bg-blue-500/10 text-blue-700 border-blue-500/25' },
+  HEALTH:   { label: 'Health',       icon: '🏃', color: 'bg-emerald-500/10 text-emerald-700 border-emerald-500/25' },
+  LEARNING: { label: 'Learning',     icon: '📚', color: 'bg-purple-500/10 text-purple-700 border-purple-500/25' },
+  PERSONAL: { label: 'Personal',     icon: '🌟', color: 'bg-rose-500/10 text-rose-700 border-rose-500/25' },
+  ACADEMIC: { label: 'Academic',     icon: '🎓', color: 'bg-cyan-500/10 text-cyan-700 border-cyan-500/25' },
+  FINANCE:  { label: 'Finance',      icon: '💰', color: 'bg-amber-500/10 text-amber-700 border-amber-500/25' },
 };
 
 const STATUS_COLORS = {
@@ -304,7 +304,7 @@ export default function GoalsView({ onShowToast }) {
                         <span className="font-medium">{goal.currentValue} / {goal.targetValue} {goal.unit}</span>
                         <span className="font-extrabold text-purple-600">{Math.round(pct)}%</span>
                       </div>
-                      <div className="w-full h-2 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden">
+                      <div className="w-full h-2 rounded-full bg-slate-200 overflow-hidden">
                         <div
                           className="h-full rounded-full bg-gradient-to-r from-purple-600 to-indigo-500 transition-all duration-500"
                           style={{ width: `${Math.min(100, pct)}%` }}
@@ -324,7 +324,7 @@ export default function GoalsView({ onShowToast }) {
                       <button
                         onClick={e => { e.stopPropagation(); updateProgress(goal.id, 1); }}
                         disabled={isUpdating}
-                        className="px-3 py-1.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 text-xs font-bold cursor-pointer transition-all flex items-center gap-1"
+                        className="px-3 py-1.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-700 text-xs font-bold cursor-pointer transition-all flex items-center gap-1"
                       >
                         {isUpdating ? <Loader2 className="w-3 h-3 animate-spin" /> : <TrendingUp className="w-3 h-3" />}
                         +1 Progress
@@ -332,7 +332,7 @@ export default function GoalsView({ onShowToast }) {
                       <button
                         onClick={e => { e.stopPropagation(); updateProgress(goal.id, -1); }}
                         disabled={isUpdating || goal.currentValue <= 0}
-                        className="px-3 py-1.5 rounded-lg bg-red-500/10 hover:bg-red-500/20 text-red-700 dark:text-red-300 text-xs font-bold cursor-pointer transition-all disabled:opacity-40"
+                        className="px-3 py-1.5 rounded-lg bg-red-500/10 hover:bg-red-500/20 text-red-700 text-xs font-bold cursor-pointer transition-all disabled:opacity-40"
                       >
                         -1 Undo
                       </button>

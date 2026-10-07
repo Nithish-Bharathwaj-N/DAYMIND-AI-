@@ -97,7 +97,7 @@ export default function MiniCalendarWidget() {
                 isSelected
                   ? 'bg-purple-600 text-white font-bold shadow-md shadow-purple-600/30 ring-2 ring-purple-500/50'
                   : isToday
-                  ? 'bg-purple-500/20 text-purple-600 dark:text-purple-400 font-extrabold ring-1 ring-purple-500'
+                  ? 'bg-purple-500/20 text-purple-600 font-extrabold ring-1 ring-purple-500'
                   : 'text-[var(--text-primary)] hover:bg-purple-500/10'
               }`}
             >

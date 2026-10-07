@@ -315,12 +315,12 @@ export default function App() {
                   {tasks.filter(t => !t.isCompleted).slice(0, 5).map((t, i) => (
                     <div key={t.id} className="flex items-center justify-between p-3 rounded-xl bg-[var(--bg-input)] border border-[var(--border-color)] hover:border-purple-500/30 transition-all group">
                       <div className="flex items-center gap-3">
-                        <span className="w-6 h-6 rounded-full bg-purple-500/10 text-purple-600 dark:text-purple-400 text-xs font-black flex items-center justify-center">{i + 1}</span>
+                        <span className="w-6 h-6 rounded-full bg-purple-500/10 text-purple-600 text-xs font-black flex items-center justify-center">{i + 1}</span>
                         <span className="text-xs font-semibold text-[var(--text-primary)]">{t.title}</span>
                       </div>
                       <button
                         onClick={() => { setFocusTask(t); setIsFocusTimerOpen(true); }}
-                        className="px-3 py-1.5 rounded-lg bg-purple-500/10 text-purple-600 dark:text-purple-400 text-[11px] font-bold border border-purple-500/20 opacity-0 group-hover:opacity-100 transition-all cursor-pointer"
+                        className="px-3 py-1.5 rounded-lg bg-purple-500/10 text-purple-600 text-[11px] font-bold border border-purple-500/20 opacity-0 group-hover:opacity-100 transition-all cursor-pointer"
                       >
                         Focus →
                       </button>
@@ -375,8 +375,8 @@ export default function App() {
 
             <div className="space-y-3">
               {[
-                { label: 'Active AI Provider', value: 'Google Gemini 2.0 Flash (Live API)', color: 'text-purple-600 dark:text-purple-400 font-bold' },
-                { label: 'Spring Boot Backend', value: 'http://localhost:8080', color: 'text-blue-600 dark:text-blue-400' },
+                { label: 'Active AI Provider', value: 'Google Gemini 2.0 Flash (Live API)', color: 'text-purple-600 font-bold' },
+                { label: 'Spring Boot Backend', value: 'http://localhost:8080', color: 'text-blue-600' },
                 { label: 'Database', value: 'H2 In-Memory · Persisted in session', color: 'text-[var(--text-secondary)]' },
               ].map(item => (
                 <div key={item.label} className="p-4 rounded-xl bg-[var(--bg-input)] border border-[var(--border-color)] flex items-center justify-between">

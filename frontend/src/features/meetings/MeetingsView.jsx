@@ -198,13 +198,13 @@ Nithish: Perfect. We also decided to adopt the new glassmorphic UI design system
                           <CheckCircle2 className="w-4 h-4 text-purple-600" />
                           <span className="text-xs font-bold text-[var(--text-primary)]">{item.task}</span>
                         </div>
-                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-500/20 text-amber-600 dark:text-amber-300 font-bold">
+                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-500/20 text-amber-600 font-bold">
                           Owner: {item.owner} • Due: {item.dueDate}
                         </span>
                       </div>
 
                       <div className="text-[11px] font-mono text-[var(--text-secondary)] flex items-center justify-between pt-1">
-                        <span>Suggested Slot: <strong className="text-purple-600 dark:text-purple-300">{item.suggestedSlot}</strong> ({item.estimatedMinutes}m)</span>
+                        <span>Suggested Slot: <strong className="text-purple-600">{item.suggestedSlot}</strong> ({item.estimatedMinutes}m)</span>
                         <span className="text-emerald-500 font-bold">Reason: {item.reason}</span>
                       </div>
                     </div>

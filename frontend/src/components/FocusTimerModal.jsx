@@ -113,46 +113,46 @@ export default function FocusTimerModal({ isOpen, onClose, task, onCompleteTask 
         {/* Close */}
         <button
           onClick={handleClose}
-          className="absolute top-6 right-6 p-2 rounded-full bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white transition-all cursor-pointer"
+          className="absolute top-6 right-6 p-2 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800 transition-all cursor-pointer"
         >
           <X className="w-5 h-5" />
         </button>
 
         {/* Header */}
         <div className="space-y-1">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-purple-500/20 text-purple-300 font-mono text-xs font-bold border border-purple-500/30">
-            <Zap className="w-4 h-4 text-purple-400" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-purple-50 text-purple-700 font-mono text-xs font-bold border border-purple-200">
+            <Zap className="w-4 h-4 text-purple-600" />
             <span>AI Deep Focus Timer</span>
           </div>
-          <h2 className="text-xl font-black text-white pt-1">
+          <h2 className="text-xl font-black text-slate-900 pt-1">
             {task ? task.title : 'Deep Focus Session'}
           </h2>
-          <p className="text-xs text-slate-400">
-            Category: <span className="text-amber-400 font-bold">{task?.category || 'General'}</span>
-            {' '}• Target: <span className="text-purple-300 font-bold">{plannedMins} mins</span>
-            {' '}• Elapsed: <span className="text-emerald-400 font-bold">{elapsed}</span>
+          <p className="text-xs text-slate-500">
+            Category: <span className="text-amber-700 font-bold">{task?.category || 'General'}</span>
+            {' '}• Target: <span className="text-purple-700 font-bold">{plannedMins} mins</span>
+            {' '}• Elapsed: <span className="text-emerald-700 font-bold">{elapsed}</span>
           </p>
         </div>
 
         {/* Timer display */}
-        <div className="py-8 px-6 rounded-3xl bg-slate-950/90 border border-purple-500/30 shadow-inner relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/10 via-transparent to-amber-500/10 opacity-50 pointer-events-none" />
+        <div className="py-8 px-6 rounded-3xl bg-slate-50 border border-slate-200 shadow-inner relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-tr from-purple-50 via-transparent to-amber-50 opacity-80 pointer-events-none" />
 
           {/* Circular progress ring */}
-          <svg className="absolute inset-0 w-full h-full opacity-20 pointer-events-none" viewBox="0 0 100 100">
-            <circle cx="50" cy="50" r="46" fill="none" stroke="#6c5ce7" strokeWidth="1.5" strokeDasharray="289" strokeDashoffset={`${289 - (289 * pct / 100)}`} strokeLinecap="round" transform="rotate(-90 50 50)" />
+          <svg className="absolute inset-0 w-full h-full opacity-30 pointer-events-none" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="46" fill="none" stroke="#7c3aed" strokeWidth="1.5" strokeDasharray="289" strokeDashoffset={`${289 - (289 * pct / 100)}`} strokeLinecap="round" transform="rotate(-90 50 50)" />
           </svg>
 
-          <div className="text-6xl md:text-7xl font-black font-mono tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-purple-300 to-cyan-400">
+          <div className="text-6xl md:text-7xl font-black font-mono tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-amber-600 via-purple-700 to-cyan-600">
             {formatted}
           </div>
-          <div className="text-xs font-mono text-slate-400 mt-2">
+          <div className="text-xs font-mono text-slate-600 font-bold mt-2">
             {isActive ? '⚡ DEEP FOCUS SESSION ACTIVE' : secondsLeft === 0 ? '✅ SESSION COMPLETE' : 'PAUSED • PRESS START TO BEGIN'}
           </div>
 
           {/* Progress bar */}
-          <div className="mt-4 w-full h-1 bg-slate-800 rounded-full overflow-hidden">
-            <div className="h-full bg-gradient-to-r from-purple-600 to-amber-400 rounded-full transition-all duration-1000" style={{ width: `${pct}%` }} />
+          <div className="mt-4 w-full h-1.5 bg-slate-200 rounded-full overflow-hidden">
+            <div className="h-full bg-gradient-to-r from-purple-600 to-amber-500 rounded-full transition-all duration-1000" style={{ width: `${pct}%` }} />
           </div>
         </div>
 
@@ -160,17 +160,17 @@ export default function FocusTimerModal({ isOpen, onClose, task, onCompleteTask 
         <div className="flex items-center justify-center gap-4">
           <button
             onClick={toggleTimer}
-            className={`px-8 py-3 rounded-2xl font-black text-sm transition-all flex items-center gap-2 shadow-lg cursor-pointer ${
+            className={`px-8 py-3 rounded-2xl font-black text-sm transition-all flex items-center gap-2 shadow-md cursor-pointer ${
               isActive
-                ? 'bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-amber-500/20'
-                : 'bg-purple-600 hover:bg-purple-500 text-white shadow-purple-600/30'
+                ? 'bg-amber-500 hover:bg-amber-600 text-white shadow-amber-500/20'
+                : 'bg-purple-600 hover:bg-purple-700 text-white shadow-purple-600/30'
             }`}
           >
             {isActive ? <><Pause className="w-5 h-5" /> Pause</> : <><Play className="w-5 h-5 fill-white" /> Start Focus</>}
           </button>
           <button
             onClick={resetTimer}
-            className="p-3 rounded-2xl bg-slate-900 border border-white/10 hover:border-white/20 text-slate-300 hover:text-white transition-all cursor-pointer"
+            className="p-3 rounded-2xl bg-slate-100 border border-slate-200 hover:bg-slate-200 text-slate-600 transition-all cursor-pointer"
             title="Reset Timer"
           >
             <RotateCcw className="w-5 h-5" />
@@ -178,9 +178,9 @@ export default function FocusTimerModal({ isOpen, onClose, task, onCompleteTask 
         </div>
 
         {/* Ambient Sound */}
-        <div className="pt-4 border-t border-white/10 space-y-2">
-          <div className="flex items-center justify-center gap-2 text-xs text-slate-400 font-bold uppercase tracking-wider">
-            <Volume2 className="w-4 h-4 text-purple-400" />
+        <div className="pt-4 border-t border-slate-200 space-y-2">
+          <div className="flex items-center justify-center gap-2 text-xs text-slate-600 font-bold uppercase tracking-wider">
+            <Volume2 className="w-4 h-4 text-purple-600" />
             <span>Ambient Focus Audio</span>
           </div>
           <div className="flex items-center justify-center gap-2 text-xs flex-wrap">
@@ -190,8 +190,8 @@ export default function FocusTimerModal({ isOpen, onClose, task, onCompleteTask 
                 onClick={() => setAmbientSound(opt.key)}
                 className={`px-3 py-1.5 rounded-xl border font-mono font-bold text-[11px] transition-all cursor-pointer ${
                   ambientSound === opt.key
-                    ? 'bg-purple-500/20 border-purple-500/40 text-purple-300'
-                    : 'bg-slate-900/60 border-white/10 text-slate-400 hover:text-white'
+                    ? 'bg-purple-100 border-purple-300 text-purple-800'
+                    : 'bg-slate-100 border-slate-200 text-slate-600 hover:bg-slate-200'
                 }`}
               >
                 {opt.label}
@@ -202,7 +202,7 @@ export default function FocusTimerModal({ isOpen, onClose, task, onCompleteTask 
 
         {/* Session log status */}
         {logStatus === 'ok' && (
-          <div className="py-2 text-emerald-400 text-xs font-bold flex items-center justify-center gap-1">
+          <div className="py-2 text-emerald-600 text-xs font-bold flex items-center justify-center gap-1">
             <Sparkles className="w-3.5 h-3.5" /> Session logged to your productivity history
           </div>
         )}
@@ -212,9 +212,9 @@ export default function FocusTimerModal({ isOpen, onClose, task, onCompleteTask 
           <div className="pt-2">
             <button
               onClick={handleComplete}
-              className="w-full py-3 rounded-xl bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/30 text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full py-3 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer"
             >
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+              <CheckCircle2 className="w-4 h-4 text-emerald-600" />
               Mark Task Complete &amp; Log Session
             </button>
           </div>
@@ -225,7 +225,7 @@ export default function FocusTimerModal({ isOpen, onClose, task, onCompleteTask 
             <button
               onClick={() => logSession(false)}
               disabled={logStatus === 'logging'}
-              className="w-full py-3 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 border border-blue-500/30 text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full py-3 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer"
             >
               <Save className="w-4 h-4" />
               {logStatus === 'logging' ? 'Logging...' : 'Log This Session'}
