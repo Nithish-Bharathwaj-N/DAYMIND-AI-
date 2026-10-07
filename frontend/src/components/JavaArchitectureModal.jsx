@@ -6,18 +6,18 @@ export default function JavaArchitectureModal({ isOpen, onClose }) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 glass-modal-overlay animate-slide-down">
-      <div className="glass-modal-content w-full max-w-4xl max-h-[90vh] overflow-y-auto p-6 md:p-8 relative border border-white/20 shadow-2xl">
+      <div className="glass-modal-content w-full max-w-4xl max-h-[90vh] overflow-y-auto p-6 md:p-8 relative border border-slate-200 shadow-xl">
         
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-6 right-6 p-2.5 rounded-full bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white transition-all cursor-pointer"
+          className="absolute top-6 right-6 p-2.5 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800 transition-all cursor-pointer"
         >
           <X className="w-5 h-5" />
         </button>
 
         {/* Modal Header */}
-        <div className="flex items-center gap-4 mb-6 pb-4 border-b border-white/10">
+        <div className="flex items-center gap-4 mb-6 pb-4 border-b border-slate-200">
           <div className="w-12 h-12 rounded-2xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-400 shadow-lg shadow-amber-500/20">
             <Cpu className="w-7 h-7" />
           </div>

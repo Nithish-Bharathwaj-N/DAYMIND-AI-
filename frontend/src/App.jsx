@@ -49,7 +49,7 @@ function Toast({ message, onDismiss }) {
 }
 
 export default function App() {
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const [activeTab, setActiveTab] = useState('dashboard');
   
   const [tasks, setTasks] = useState([]);
@@ -69,10 +69,10 @@ export default function App() {
   const [selectedTask, setSelectedTask] = useState(null);
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
 
-  // Force Dark theme class to root HTML element
+  // Force Light theme class on root HTML element
   useEffect(() => {
-    document.documentElement.classList.add('dark');
-    localStorage.setItem('daymind-theme', 'dark');
+    document.documentElement.classList.remove('dark');
+    localStorage.setItem('daymind-theme', 'light');
   }, []);
 
   // Global keyboard shortcut: Cmd+K / Ctrl+K → command bar

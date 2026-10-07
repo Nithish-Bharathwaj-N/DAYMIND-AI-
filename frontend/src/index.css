@@ -2,29 +2,29 @@
 @import "tailwindcss";
 
 @layer base {
-  :root, .dark {
-    --bg-main: #0b0e17;
-    --bg-card: #131826;
-    --bg-sidebar: #101421;
-    --bg-sidebar-active: rgba(108, 92, 231, 0.2);
-    --bg-input: #1a2035;
-    --border-color: #1e2638;
-    --border-strong: #2a3450;
-    --text-primary: #f1f5f9;
-    --text-secondary: #94a3b8;
+  :root {
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-sidebar: #ffffff;
+    --bg-sidebar-active: rgba(124, 58, 237, 0.08);
+    --bg-input: #f1f5f9;
+    --border-color: #e2e8f0;
+    --border-strong: #cbd5e1;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
     --text-muted: #64748b;
     --accent-purple: #7c3aed;
-    --accent-purple-light: rgba(124, 58, 237, 0.2);
-    --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
-    --tag-bg: #1e2638;
-    --tag-border: #2a3450;
-    --code-bg: #0d1117;
-    color-scheme: dark;
+    --accent-purple-light: rgba(124, 58, 237, 0.1);
+    --card-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.05), 0 4px 12px -2px rgba(15, 23, 42, 0.03);
+    --tag-bg: #f1f5f9;
+    --tag-border: #e2e8f0;
+    --code-bg: #f8fafc;
+    color-scheme: light;
   }
 
   html, body {
-    background-color: #0b0e17;
-    color: #f1f5f9;
+    background-color: #f8fafc;
+    color: #0f172a;
     font-family: 'Plus Jakarta Sans', sans-serif;
     transition: background-color 0.2s ease, color 0.2s ease;
     overflow-x: hidden;
@@ -54,27 +54,22 @@
   border-right: 1px solid var(--border-color);
 }
 
-/* ─── Glass Card — THEME-AWARE (not dark-only) ─── */
+/* ─── Glass Card — LIGHT THEME ─── */
 .glass-card {
-  background-color: var(--bg-card);
-  border: 1px solid var(--border-color);
+  background-color: rgba(255, 255, 255, 0.85);
+  border: 1px solid #e2e8f0;
   border-radius: 1rem;
-  box-shadow: var(--card-shadow);
+  box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.05), 0 4px 12px -2px rgba(15, 23, 42, 0.03);
+  backdrop-filter: blur(12px);
   transition: all 0.2s ease;
 }
 
-.dark .glass-card {
-  background: rgba(19, 24, 38, 0.85);
-  border-color: rgba(255,255,255,0.08);
-  backdrop-filter: blur(12px);
-}
-
-/* ─── Solid Non-Transparent Modal — prevents background bleed ─── */
+/* ─── Solid Non-Transparent Modal — LIGHT THEME ─── */
 .glass-modal-overlay {
   position: fixed;
   inset: 0;
   z-index: 50;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(15, 23, 42, 0.4);
   backdrop-filter: blur(6px);
   display: flex;
   align-items: center;
@@ -85,11 +80,11 @@
 .glass-modal-content {
   position: relative;
   z-index: 51;
-  background-color: var(--bg-card) !important;
-  border: 1px solid var(--border-color) !important;
-  color: var(--text-primary) !important;
+  background-color: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  color: #0f172a !important;
   border-radius: 1.25rem;
-  box-shadow: 0 20px 60px -10px rgba(0, 0, 0, 0.4) !important;
+  box-shadow: 0 25px 60px -15px rgba(15, 23, 42, 0.15) !important;
   opacity: 1 !important;
 }
 
@@ -142,7 +137,7 @@
   position: absolute;
   inset: -2px;
   border-radius: inherit;
-  background: linear-gradient(135deg, #6c5ce7, #a78bfa, #06b6d4);
+  background: linear-gradient(135deg, #7c3aed, #a78bfa, #06b6d4);
   opacity: 0;
   transition: opacity 0.3s ease;
   z-index: -1;
@@ -169,8 +164,8 @@
 /* ─── Custom Scrollbar ─── */
 ::-webkit-scrollbar { width: 5px; height: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 9999px; }
-::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
 
 .scrollbar-none::-webkit-scrollbar { display: none; }
 .scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
@@ -244,3 +239,4 @@
   border-color: var(--accent-purple);
   box-shadow: 0 0 0 3px var(--accent-purple-light);
 }
+

@@ -107,13 +107,13 @@ export default function Sidebar({ activeTab, onSelectTab, isDarkMode, onToggleDa
           <ChevronRight className="w-4 h-4 text-slate-400" />
         </div>
 
-        {/* Dark Mode Permanent Indicator */}
-        <div className="flex items-center justify-between px-3 py-2 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-300">
+        {/* Light Mode Permanent Indicator */}
+        <div className="flex items-center justify-between px-3 py-2 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-700">
           <div className="flex items-center gap-2 text-[11px] font-bold">
-            <Moon className="w-3.5 h-3.5 text-purple-400" />
-            <span>Dark Mode Active</span>
+            <Sun className="w-3.5 h-3.5 text-amber-500" />
+            <span>Light Mode Active</span>
           </div>
-          <span className="w-2 h-2 rounded-full bg-purple-500 animate-pulse" />
+          <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
         </div>
 
       </div>
