@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { X, Play, Pause, RotateCcw, Volume2, CheckCircle2, Zap, Sparkles, Save } from 'lucide-react';
+import { sound } from '../utils/audio';
 
 const AMBIENT_OPTIONS = [
   { key: 'RAIN',        label: '🌧 Rain',      emoji: '🌧' },
@@ -28,6 +29,18 @@ export default function FocusTimerModal({ isOpen, onClose, task, onCompleteTask 
     setSessionLogged(false);
     setLogStatus(null);
   }, [task]);
+
+  // Ambient focus audio playback control
+  useEffect(() => {
+    if (isOpen && isActive && ambientSound !== 'SILENCE') {
+      sound.playAmbient(ambientSound);
+    } else {
+      sound.stopAmbient();
+    }
+    return () => {
+      sound.stopAmbient();
+    };
+  }, [isOpen, isActive, ambientSound]);
 
   useEffect(() => {
     let timer = null;
