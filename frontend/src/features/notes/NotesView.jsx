@@ -175,9 +175,12 @@ export default function NotesView({ onShowToast }) {
           {notes.map(note => {
             const colorDef = getColorForNote(note);
             return (
-              <button
+              <div
                 key={note.id}
                 onClick={() => setActiveNote(note.id)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={e => e.key === 'Enter' && setActiveNote(note.id)}
                 className={`w-full text-left p-3 rounded-xl border transition-all cursor-pointer group ${colorDef.border} ${colorDef.bg} ${activeNote === note.id ? 'ring-2 ring-purple-500' : 'hover:ring-1 hover:ring-purple-500/30'}`}
               >
                 <div className="flex items-start justify-between gap-2 mb-1">
@@ -187,7 +190,7 @@ export default function NotesView({ onShowToast }) {
                   </span>
                   <button
                     onClick={e => { e.stopPropagation(); deleteNote(note.id); }}
-                    className="opacity-0 group-hover:opacity-100 p-1 rounded-lg hover:bg-red-500/15 text-red-500 transition-all flex-shrink-0"
+                    className="opacity-0 group-hover:opacity-100 p-1 rounded-lg hover:bg-red-500/15 text-red-500 transition-all flex-shrink-0 cursor-pointer"
                   >
                     <Trash2 className="w-3 h-3" />
                   </button>
@@ -198,7 +201,7 @@ export default function NotesView({ onShowToast }) {
                 <p className="text-[9px] text-[var(--text-muted)] mt-1.5">
                   {formatDate(note.updatedAt || note.createdAt)}
                 </p>
-              </button>
+              </div>
             );
           })}
         </div>
